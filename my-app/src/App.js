@@ -1,3 +1,4 @@
+/* global fetch */
 import React from 'react'
 // import logo from './logo.svg'
 import './App.css'
@@ -214,12 +215,36 @@ class App extends React.Component {
         accountId: accountId,
         password: password
       }
-      console.log('HERE@@@@@@@@@@@@@@@@@@', user)
-      if (accountId === 'Ronny' && password === '123') {
-        this.setState({ isLoggedin: true, loginMessage: 'Login Successfully', success: true })
-      } else {
-        this.setState({ isLoggedin: false, loginMessage: 'Wrong username or password', success: false })
-      }
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+
+      }).then((response) => {
+        if (response.status >= 400) {
+          throw new Error('Bad response from server')
+        }
+        response.json().then((data) => {
+          console.log(data)
+          if (data.code === 0) { // security leak, should use token and get page?
+            const date = new Date()
+            date.setTime(date.getTime() + (1440 * 60 * 1000)) // expires in 1 day
+            // cookie.save("savedAltumUser", user, {path: "/", expires: date});
+            this.setState({ isLoggedin: true, loginMessage: 'Login Successfully', success: true })
+          } else {
+            this.setState({ isLogined: false, loginMessage: 'Wrong username or password', success: false })
+          }
+        })
+      }).catch((error) => {
+        console.log(error)
+        this.setState({ isLogined: false, loginMessage: 'Internal Server Error', success: false })
+      })
+      // console.log('HERE@@@@@@@@@@@@@@@@@@', user)
+      // if (accountId === 'Ronny' && password === '123') {
+      //   this.setState({ isLoggedin: true, loginMessage: 'Login Successfully', success: true })
+      // } else {
+      //   this.setState({ isLoggedin: false, loginMessage: 'Wrong username or password', success: false })
+      // }
     }
   }
 
