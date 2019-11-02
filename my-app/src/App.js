@@ -16,20 +16,20 @@ import Image from 'material-ui-image'
 
 const buttonImages = [
   {
-    url: '/static/images/button/Groupbutton.jpg',
+    url: 'static/images/button/Groupbutton.jpg',
     title: 'Group'
   },
   {
-    url: '/static/images/button/Vivianbutton.jpg',
+    url: 'static/images/button/Vivianbutton.jpg',
     title: 'Vivian',
     width: '30%'
   },
   {
-    url: '/static/images/button/Paulbutton.jpg',
+    url: 'static/images/button/Paulbutton.jpg',
     title: 'Paul'
   },
   {
-    url: '/static/images/button/Sarahbutton.jpg',
+    url: 'static/images/button/Sarahbutton.jpg',
     title: 'Sarah'
   }
 ]
@@ -243,9 +243,7 @@ function ImageMenuButton (props) {
           key={image.title}
           className={classes.buttonImage}
           focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: image.width
-          }}
+          fullWidth
         >
           <span
             className={classes.imageSrc}
