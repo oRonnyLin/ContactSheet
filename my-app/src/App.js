@@ -252,7 +252,7 @@ function ImageMenuButton (props) {
   const classes = useStyles()
   return (
     <div>
-      {buttonImages.map((image, index) => (
+      {oneRow.map((image, index) => (
         <div key={index} className={classes.buttonImageRoot}>
           <ButtonBase
             focusRipple
