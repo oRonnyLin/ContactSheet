@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     transition: '3000'
   },
   paper: {
-    margin: theme.spacing(4, 4),
+    margin: theme.spacing(2, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
