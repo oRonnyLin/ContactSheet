@@ -77,13 +77,14 @@ const useStyles = makeStyles(theme => ({
   },
   test: {
     // maxHeight: '100%'
-    height: '100vh'
+    objectFit: 'cover'
   },
   buttonImageRoot: {
     display: 'flex',
     flexWrap: 'wrap',
     minWidth: 300,
-    width: '100%'
+    width: '100%',
+    paddingBottom: '5px'
   },
   menuRoot: {
     width: '100%',
@@ -237,9 +238,9 @@ function LeftGrid (props) {
 
   return (
     <Grid item xs={false} sm={4} md={7} className={classes.image}>
-      <div className='test'>
-        <Image src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
-      </div>
+      {/* <div className='test'> */}
+      <Image className='test' src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+      {/* </div> */}
     </Grid>
   )
 }
@@ -260,36 +261,36 @@ function ImageMenuButton (props) {
     <div className={classes.menuRoot}>
       {buttonImages.map((image, index) => (
         <div key={index} className={classes.buttonImageRoot}>
-          <Fade in='true'>
-            <ButtonBase
-              focusRipple
-              key={image.title}
-              className={classes.buttonImage}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                width: image.width
-              }}
-            >
+          <ButtonBase
+            focusRipple
+            key={image.title}
+            className={classes.buttonImage}
+            focusVisibleClassName={classes.focusVisible}
+            style={{
+              width: image.width
+            }}
+          >
+            <Fade in='true'>
               <span
                 className={classes.imageSrc}
                 style={{
                   backgroundImage: `url(${image.url})`
                 }}
               />
-              <span className={classes.imageBackdrop} />
-              <span className={classes.imageButton}>
-                <Typography
-                  component='span'
-                  variant='subtitle1'
-                  color='inherit'
-                  className={classes.imageTitle}
-                >
-                  {image.title}
-                  <span className={classes.imageMarked} />
-                </Typography>
-              </span>
-            </ButtonBase>
-          </Fade>
+            </Fade>
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+              <Typography
+                component='span'
+                variant='subtitle1'
+                color='inherit'
+                className={classes.imageTitle}
+              >
+                {image.title}
+                <span className={classes.imageMarked} />
+              </Typography>
+            </span>
+          </ButtonBase>
         </div>
       ))}
     </div>
