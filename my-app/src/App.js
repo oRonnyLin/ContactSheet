@@ -18,6 +18,13 @@ import vivianButton from './static/images/button/Vivianbutton.jpg'
 import sarahButton from './static/images/button/Sarahbutton.jpg'
 import groupButton from './static/images/button/Groupbutton.jpg'
 
+const oneRow = [
+  {
+    url: groupButton,
+    title: 'Group',
+    width: '100%'
+  }
+]
 const buttonImages = [
   {
     url: groupButton,
@@ -244,7 +251,7 @@ function ImageMenuButton (props) {
   const classes = useStyles()
   return (
     <div className={classes.buttonImageRoot}>
-      {buttonImages.map((image, index) => (
+      {oneRow.map((image, index) => (
         // <div key={index} className={classes.buttonImageRoot}>
         <ButtonBase
           focusRipple
