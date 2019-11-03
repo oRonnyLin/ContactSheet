@@ -86,7 +86,8 @@ const useStyles = makeStyles(theme => ({
   menuRoot: {
     width: '100%',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    padding: '4,0,0,0'
   },
   buttonImage: {
     position: 'relative',
