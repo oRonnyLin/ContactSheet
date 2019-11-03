@@ -231,11 +231,10 @@ function LeftGrid (props) {
 
   return (
     <Grid item xs={false} sm={4} md={7} className={classes.image}>
-      {/* <div className='test'> */}
-      {/* <Fade in='true'>
-        <img className='test' src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
-      </Fade> */}
-      {/* </div> */}
+      <div className='test'>
+        <Image className='test' src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+
+      </div>
     </Grid>
   )
 }
