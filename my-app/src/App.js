@@ -222,7 +222,7 @@ function RightGrid (props) {
             Trio Photo
         </Typography>
         {props.children}
-        <Box position='absolute' bottom='25px' mt={5}>
+        <Box position='relative' mt={5}>
           <Copyright />
         </Box>
 
@@ -442,7 +442,6 @@ class App extends React.Component {
               handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
               handleLoginClick={() => this.handleLoginClick()}
             />
-
           </Fade>
         </div>
       )
