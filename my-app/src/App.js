@@ -17,6 +17,7 @@ import paulButton from './static/images/button/Paulbutton.jpg'
 import vivianButton from './static/images/button/Vivianbutton.jpg'
 import sarahButton from './static/images/button/Sarahbutton.jpg'
 import groupButton from './static/images/button/Groupbutton.jpg'
+import { Fade } from '@material-ui/core'
 
 const oneRow = [
   {
@@ -259,34 +260,36 @@ function ImageMenuButton (props) {
     <div className={classes.menuRoot}>
       {buttonImages.map((image, index) => (
         <div key={index} className={classes.buttonImageRoot}>
-          <ButtonBase
-            focusRipple
-            key={image.title}
-            className={classes.buttonImage}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: image.width
-            }}
-          >
-            <span
-              className={classes.imageSrc}
+          <Fade in='true'>
+            <ButtonBase
+              focusRipple
+              key={image.title}
+              className={classes.buttonImage}
+              focusVisibleClassName={classes.focusVisible}
               style={{
-                backgroundImage: `url(${image.url})`
+                width: image.width
               }}
-            />
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-              <Typography
-                component='span'
-                variant='subtitle1'
-                color='inherit'
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <span className={classes.imageMarked} />
-              </Typography>
-            </span>
-          </ButtonBase>
+            >
+              <span
+                className={classes.imageSrc}
+                style={{
+                  backgroundImage: `url(${image.url})`
+                }}
+              />
+              <span className={classes.imageBackdrop} />
+              <span className={classes.imageButton}>
+                <Typography
+                  component='span'
+                  variant='subtitle1'
+                  color='inherit'
+                  className={classes.imageTitle}
+                >
+                  {image.title}
+                  <span className={classes.imageMarked} />
+                </Typography>
+              </span>
+            </ButtonBase>
+          </Fade>
         </div>
       ))}
     </div>
