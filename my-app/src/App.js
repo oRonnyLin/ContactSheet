@@ -18,51 +18,7 @@ import vivianButton from './static/images/button/Vivianbutton.jpg'
 import sarahButton from './static/images/button/Sarahbutton.jpg'
 import groupButton from './static/images/button/Groupbutton.jpg'
 import { Fade } from '@material-ui/core'
-import LazyLoad from 'react-lazyload'
-import { Transition } from 'react-transition-group'
 
-const duration = 300
-
-const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0
-}
-
-const transitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 }
-}
-class FadeIn extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      loaded: false
-    }
-    this.onLoad = this.onLoad.bind(this)
-  }
-
-  onLoad () {
-    this.setState({ loaded: true })
-  }
-
-  render () {
-    const { height, children } = this.props
-    const { loaded } = this.state
-
-    return (
-      <LazyLoad height={height} offset={150}>
-        <Transition in={loaded} timeout={duration}>
-          {state =>
-            <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
-              {children(this.onLoad)}
-            </div>}
-        </Transition>
-      </LazyLoad>
-    )
-  }
-}
 const buttonImages = [
   {
     url: groupButton,
