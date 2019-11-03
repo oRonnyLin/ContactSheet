@@ -243,7 +243,7 @@ function LeftGrid (props) {
             <img objectFit='cover' height='100vh' className={classes.test} onLoad={onLoad} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />}
         </FadeIn> */}
 
-        <Image imageStyle={{ objectFit: 'cover' }} style={{ objectFit: 'cover' }} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+        {/* <Image imageStyle={{ objectFit: 'cover' }} style={{ objectFit: 'cover' }} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
         {/* </div> */}
       </Grid>
     </Fade>
