@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
-    padding: '4,0,0,0'
+    padding: '20,0,0,0'
   },
   buttonImage: {
     position: 'relative',
@@ -275,8 +275,7 @@ function ImageMenuButton (props) {
               className={classes.buttonImage}
               focusVisibleClassName={classes.focusVisible}
               style={{
-                width: image.width,
-                height: '15vh'
+                width: image.width
               }}
             >
               <Fade in='true'>
