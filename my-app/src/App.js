@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     height: '100vh'
   },
   image: {
-    // backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
+    backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center'
@@ -232,9 +232,9 @@ function LeftGrid (props) {
   return (
     <Grid item xs={false} sm={4} md={7} className={classes.image}>
       {/* <div className='test'> */}
-      <Fade in='true'>
+      {/* <Fade in='true'>
         <img className='test' src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
-      </Fade>
+      </Fade> */}
       {/* </div> */}
     </Grid>
   )
