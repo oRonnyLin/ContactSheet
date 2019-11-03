@@ -45,12 +45,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh'
   },
-  // image: {
-  //   backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundSize: 'cover',
-  //   backgroundPosition: 'center'
-  // },
+  image: {
+    backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
   paper: {
     margin: theme.spacing(8, 4),
     display: 'flex',
@@ -68,11 +68,12 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2)
   },
-  test: {
-    height: '200px',
-    width: '200px',
-    objectFit: 'cover'
-  },
+  // test: {
+  //   maxWidth: '100%'
+  //   // height: '200px',
+  //   // // width: '200px',
+  //   // objectFit: 'cover'
+  // },
   buttonImageRoot: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -231,10 +232,10 @@ function LeftGrid (props) {
   const classes = useStyles()
 
   return (
-    // <Grid item xs={false} sm={4} md={7} className={classes.image}>
-    <Grid item xs={false} sm={4} md={7}>
+    <Grid item xs={false} sm={4} md={7} className={classes.image}>
+      {/* <Grid item xs={false} sm={4} md={7}> */}
       {/* <div className='test'> */}
-      <img className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+      {/* <img className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
 
       {/* <Image className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
       {/* </div> */}
