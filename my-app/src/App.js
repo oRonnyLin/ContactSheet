@@ -29,22 +29,22 @@ const buttonImages = [
   {
     url: groupButton,
     title: 'Group',
-    width: '30%'
+    width: '100%'
   },
   {
     url: vivianButton,
     title: 'Vivian',
-    width: '30%'
+    width: '100%'
   },
   {
     url: paulButton,
     title: 'Paul',
-    width: '20%'
+    width: '100%'
   },
   {
     url: sarahButton,
     title: 'Sarah',
-    width: '20%'
+    width: '100%'
   }
 ]
 const useStyles = makeStyles(theme => ({
@@ -137,7 +137,8 @@ const useStyles = makeStyles(theme => ({
   },
   imageTitle: {
     position: 'relative',
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`
+    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
+    fontSize: '30px'
   },
   imageMarked: {
     height: 3,
@@ -250,38 +251,38 @@ function GridMain (props) {
 function ImageMenuButton (props) {
   const classes = useStyles()
   return (
-    <div className={classes.buttonImageRoot}>
-      {oneRow.map((image, index) => (
-        // <div key={index} className={classes.buttonImageRoot}>
-        <ButtonBase
-          focusRipple
-          key={image.title}
-          className={classes.buttonImage}
-          focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: image.width
-          }}
-        >
-          <span
-            className={classes.imageSrc}
+    <div>
+      {buttonImages.map((image, index) => (
+        <div key={index} className={classes.buttonImageRoot}>
+          <ButtonBase
+            focusRipple
+            key={image.title}
+            className={classes.buttonImage}
+            focusVisibleClassName={classes.focusVisible}
             style={{
-              backgroundImage: `url(${image.url})`
+              width: image.width
             }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component='span'
-              variant='subtitle1'
-              color='inherit'
-              className={classes.imageTitle}
-            >
-              {image.title}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-        </ButtonBase>
-        // </div>
+          >
+            <span
+              className={classes.imageSrc}
+              style={{
+                backgroundImage: `url(${image.url})`
+              }}
+            />
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+              <Typography
+                component='span'
+                variant='subtitle1'
+                color='inherit'
+                className={classes.imageTitle}
+              >
+                {image.title}
+                <span className={classes.imageMarked} />
+              </Typography>
+            </span>
+          </ButtonBase>
+        </div>
       ))}
     </div>
   )
