@@ -434,14 +434,11 @@ class App extends React.Component {
             />
 
           </Fade>
-          {this.renderMessage()}
         </div>
       )
     } else {
       return (
-        <Fade in={this.state.isLoggedin}>
-          <ImageMenuButton />
-        </Fade>
+        <ImageMenuButton />
       )
     }
   }
