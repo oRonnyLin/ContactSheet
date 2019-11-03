@@ -1,5 +1,6 @@
 /* global fetch */
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 // import logo from './logo.svg'
 import './App.css'
 import Button from '@material-ui/core/Button'
@@ -54,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     transition: '3000'
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(4, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -366,6 +367,11 @@ class App extends React.Component {
     this.handleLoginClick = this.handleLoginClick.bind(this)
   }
 
+  routeChange () {
+    const path = 'newPath'
+    this.props.history.push(path)
+  }
+
   handleUserFieldChange (event) {
     this.setState({
       accountId: event.target.value
@@ -376,6 +382,22 @@ class App extends React.Component {
     this.setState({
       password: event.target.value
     })
+  }
+
+  handleButtonPaul () {
+
+  }
+
+  handleButtonVivian () {
+
+  }
+
+  handleButtonSarah () {
+
+  }
+
+  handleButtonGroup () {
+
   }
 
   handleLoginClick () {
