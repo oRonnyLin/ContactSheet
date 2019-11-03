@@ -251,39 +251,41 @@ function GridMain (props) {
 function ImageMenuButton (props) {
   const classes = useStyles()
   return (
-    <div className={classes.buttonImageRoot}>
-      {oneRow.map((image, index) => (
+    <div>
+      <div className={classes.buttonImageRoot}>
+        {oneRow.map((image, index) => (
         // <div key={index} className={classes.buttonImageRoot}>
-        <ButtonBase
-          focusRipple
-          key={image.title}
-          className={classes.buttonImage}
-          focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: image.width
-          }}
-        >
-          <span
-            className={classes.imageSrc}
+          <ButtonBase
+            focusRipple
+            key={image.title}
+            className={classes.buttonImage}
+            focusVisibleClassName={classes.focusVisible}
             style={{
-              backgroundImage: `url(${image.url})`
+              width: image.width
             }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component='span'
-              variant='subtitle1'
-              color='inherit'
-              className={classes.imageTitle}
-            >
-              {image.title}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-        </ButtonBase>
+          >
+            <span
+              className={classes.imageSrc}
+              style={{
+                backgroundImage: `url(${image.url})`
+              }}
+            />
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+              <Typography
+                component='span'
+                variant='subtitle1'
+                color='inherit'
+                className={classes.imageTitle}
+              >
+                {image.title}
+                <span className={classes.imageMarked} />
+              </Typography>
+            </span>
+          </ButtonBase>
         // </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
