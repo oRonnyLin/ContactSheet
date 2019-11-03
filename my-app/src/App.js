@@ -233,7 +233,9 @@ function LeftGrid (props) {
     // <Grid item xs={false} sm={4} md={7} className={classes.image}>
     <Grid item xs={false} sm={4} md={7}>
       {/* <div className='test'> */}
-      <Image className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+      <img className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+
+      {/* <Image className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
       {/* </div> */}
     </Grid>
   )
