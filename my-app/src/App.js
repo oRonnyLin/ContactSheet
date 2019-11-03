@@ -19,13 +19,6 @@ import sarahButton from './static/images/button/Sarahbutton.jpg'
 import groupButton from './static/images/button/Groupbutton.jpg'
 import { Fade } from '@material-ui/core'
 
-const oneRow = [
-  {
-    url: groupButton,
-    title: 'Group',
-    width: '100%'
-  }
-]
 const buttonImages = [
   {
     url: groupButton,
@@ -224,7 +217,7 @@ function RightGrid (props) {
             Trio Photo
         </Typography>
         {props.children}
-        <Box position='absolute' bottom='50px' mt={5}>
+        <Box position='absolute' bottom='25px' mt={5}>
           <Copyright />
         </Box>
 
@@ -239,7 +232,7 @@ function LeftGrid (props) {
   return (
     <Grid item xs={false} sm={4} md={7} className={classes.image}>
       {/* <div className='test'> */}
-      <Image className='test' src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+      <img className='test' src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
       {/* </div> */}
     </Grid>
   )
@@ -297,49 +290,49 @@ function ImageMenuButton (props) {
   )
 }
 
-function MenuButton (props) {
-  const classes = useStyles()
-  return (
-    <div>
-      <Button
-        fullWidth
-        variant='contained'
-        color='primary'
-        className={classes.submit}
-        onClick={props.handleLoginClick}
-      >
-              Group
-      </Button>
-      <Button
-        fullWidth
-        variant='contained'
-        color='primary'
-        className={classes.submit}
-        onClick={props.handleLoginClick}
-      >
-              Paul
-      </Button>
-      <Button
-        fullWidth
-        variant='contained'
-        color='primary'
-        className={classes.submit}
-        onClick={props.handleLoginClick}
-      >
-              Sarah
-      </Button>
-      <Button
-        fullWidth
-        variant='contained'
-        color='primary'
-        className={classes.submit}
-        onClick={props.handleLoginClick}
-      >
-              Vivian
-      </Button>
-    </div>
-  )
-}
+// function MenuButton (props) {
+//   const classes = useStyles()
+//   return (
+//     <div>
+//       <Button
+//         fullWidth
+//         variant='contained'
+//         color='primary'
+//         className={classes.submit}
+//         onClick={props.handleLoginClick}
+//       >
+//               Group
+//       </Button>
+//       <Button
+//         fullWidth
+//         variant='contained'
+//         color='primary'
+//         className={classes.submit}
+//         onClick={props.handleLoginClick}
+//       >
+//               Paul
+//       </Button>
+//       <Button
+//         fullWidth
+//         variant='contained'
+//         color='primary'
+//         className={classes.submit}
+//         onClick={props.handleLoginClick}
+//       >
+//               Sarah
+//       </Button>
+//       <Button
+//         fullWidth
+//         variant='contained'
+//         color='primary'
+//         className={classes.submit}
+//         onClick={props.handleLoginClick}
+//       >
+//               Vivian
+//       </Button>
+//     </div>
+//   )
+// }
 
 class App extends React.Component {
   constructor (props) {
