@@ -17,6 +17,7 @@ import paulButton from './static/images/button/Paulbutton.jpg'
 import vivianButton from './static/images/button/Vivianbutton.jpg'
 import sarahButton from './static/images/button/Sarahbutton.jpg'
 import groupButton from './static/images/button/Groupbutton.jpg'
+import webImage from './static/images/WebImg.jpg'
 import { Fade } from '@material-ui/core'
 
 const buttonImages = [
@@ -46,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     height: '100vh'
   },
   image: {
-    // backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
+    backgroundImage: `url(${webImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
