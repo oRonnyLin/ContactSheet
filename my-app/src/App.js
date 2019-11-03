@@ -13,23 +13,27 @@ import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import { makeStyles } from '@material-ui/core/styles'
 import Image from 'material-ui-image'
+import paulButton from '../static/images/button/paulButton.jpg'
+import vivianButton from '../static/images/button/vivianButton.jpg'
+import sarahButton from '../static/images/button/sarahButton.jpg'
+import groupButton from '../static/images/button/groupButton.jpg'
 
 const buttonImages = [
   {
-    url: './static/images/button/Groupbutton.jpg',
+    url: groupButton,
     title: 'Group'
   },
   {
-    url: './static/images/button/Vivianbutton.jpg',
+    url: vivianButton,
     title: 'Vivian',
     width: '30%'
   },
   {
-    url: './static/images/button/Paulbutton.jpg',
+    url: paulButton,
     title: 'Paul'
   },
   {
-    url: './static/images/button/Sarahbutton.jpg',
+    url: sarahButton,
     title: 'Sarah'
   }
 ]
