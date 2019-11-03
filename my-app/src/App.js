@@ -275,7 +275,8 @@ function ImageMenuButton (props) {
               className={classes.buttonImage}
               focusVisibleClassName={classes.focusVisible}
               style={{
-                width: image.width
+                width: image.width,
+                height: '15vh'
               }}
             >
               <Fade in='true'>
