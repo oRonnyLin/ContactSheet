@@ -20,7 +20,7 @@ import groupButton from './static/images/button/Groupbutton.jpg'
 
 const buttonImages = [
   {
-    url: groupButton,
+    url: '/static/images/button/Groupbutton.jpg',
     title: 'Group'
   },
   {
