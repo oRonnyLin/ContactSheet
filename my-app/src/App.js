@@ -84,6 +84,11 @@ const useStyles = makeStyles(theme => ({
     minWidth: 300,
     width: '100%'
   },
+  menuRoot: {
+    width: '100%',
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
   buttonImage: {
     position: 'relative',
     height: 200,
@@ -251,10 +256,9 @@ function GridMain (props) {
 function ImageMenuButton (props) {
   const classes = useStyles()
   return (
-    <div>
-      <div className={classes.buttonImageRoot}>
-        {oneRow.map((image, index) => (
-        // <div key={index} className={classes.buttonImageRoot}>
+    <div className={classes.menuRoot}>
+      {oneRow.map((image, index) => (
+        <div key={index} className={classes.buttonImageRoot}>
           <ButtonBase
             focusRipple
             key={image.title}
@@ -283,9 +287,8 @@ function ImageMenuButton (props) {
               </Typography>
             </span>
           </ButtonBase>
-        // </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   )
 }
