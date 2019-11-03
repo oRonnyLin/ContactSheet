@@ -18,7 +18,51 @@ import vivianButton from './static/images/button/Vivianbutton.jpg'
 import sarahButton from './static/images/button/Sarahbutton.jpg'
 import groupButton from './static/images/button/Groupbutton.jpg'
 import { Fade } from '@material-ui/core'
+import LazyLoad from 'react-lazyload'
+import { Transition } from 'react-transition-group'
 
+const duration = 300
+
+const defaultStyle = {
+  transition: `opacity ${duration}ms ease-in-out`,
+  opacity: 0
+}
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 }
+}
+class FadeIn extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      loaded: false
+    }
+    this.onLoad = this.onLoad.bind(this)
+  }
+
+  onLoad () {
+    this.setState({ loaded: true })
+  }
+
+  render () {
+    const { height, children } = this.props
+    const { loaded } = this.state
+
+    return (
+      <LazyLoad height={height} offset={150}>
+        <Transition in={loaded} timeout={duration}>
+          {state =>
+            <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
+              {children(this.onLoad)}
+            </div>}
+        </Transition>
+      </LazyLoad>
+    )
+  }
+}
 const buttonImages = [
   {
     url: groupButton,
@@ -46,10 +90,11 @@ const useStyles = makeStyles(theme => ({
     height: '100vh'
   },
   image: {
-    backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
+    // backgroundImage: 'url(https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    transition: '3000'
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -68,12 +113,12 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2)
   },
-  // test: {
-  //   maxWidth: '100%'
-  //   // height: '200px',
-  //   // // width: '200px',
-  //   // objectFit: 'cover'
-  // },
+  test: {
+    // maxWidth: '100%'
+    // // height: '200px',
+    // // // width: '200px',
+    objectFit: 'cover'
+  },
   buttonImageRoot: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -232,14 +277,19 @@ function LeftGrid (props) {
   const classes = useStyles()
 
   return (
-    <Grid item xs={false} sm={4} md={7} className={classes.image}>
-      {/* <Grid item xs={false} sm={4} md={7}> */}
-      {/* <div className='test'> */}
-      {/* <img className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
+    <Fade in='true'>
+      <Grid item xs={false} sm={4} md={7} className={classes.image}>
+        {/* <Grid item xs={false} sm={4} md={7}> */}
+        {/* <div className='test'> */}
+        {/* <FadeIn height='100%'>
+          {onLoad =>
+            <img objectFit='cover' height='100vh' className={classes.test} onLoad={onLoad} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />}
+        </FadeIn> */}
 
-      {/* <Image className={classes.test} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
-      {/* </div> */}
-    </Grid>
+        <Image imageStyle={{ objectFit: 'cover' }} style={{ objectFit: 'cover' }} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />
+        {/* </div> */}
+      </Grid>
+    </Fade>
   )
 }
 
@@ -259,36 +309,38 @@ function ImageMenuButton (props) {
     <div className={classes.menuRoot}>
       {buttonImages.map((image, index) => (
         <div key={index} className={classes.buttonImageRoot}>
-          <ButtonBase
-            focusRipple
-            key={image.title}
-            className={classes.buttonImage}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: image.width
-            }}
-          >
-            <Fade in='true'>
-              <span
-                className={classes.imageSrc}
-                style={{
-                  backgroundImage: `url(${image.url})`
-                }}
-              />
-            </Fade>
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-              <Typography
-                component='span'
-                variant='subtitle1'
-                color='inherit'
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <span className={classes.imageMarked} />
-              </Typography>
-            </span>
-          </ButtonBase>
+          <Fade in='true'>
+            <ButtonBase
+              focusRipple
+              key={image.title}
+              className={classes.buttonImage}
+              focusVisibleClassName={classes.focusVisible}
+              style={{
+                width: image.width
+              }}
+            >
+              <Fade in='true'>
+                <span
+                  className={classes.imageSrc}
+                  style={{
+                    backgroundImage: `url(${image.url})`
+                  }}
+                />
+              </Fade>
+              <span className={classes.imageBackdrop} />
+              <span className={classes.imageButton}>
+                <Typography
+                  component='span'
+                  variant='subtitle1'
+                  color='inherit'
+                  className={classes.imageTitle}
+                >
+                  {image.title}
+                  <span className={classes.imageMarked} />
+                </Typography>
+              </span>
+            </ButtonBase>
+          </Fade>
         </div>
       ))}
     </div>
