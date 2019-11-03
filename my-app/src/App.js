@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   },
   test: {
-    maxHeight: '100vh',
+    height: '100vg',
     objectFit: 'cover'
   },
   buttonImageRoot: {
