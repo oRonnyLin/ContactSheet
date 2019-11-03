@@ -426,17 +426,22 @@ class App extends React.Component {
     if (!this.state.isLoggedin) {
       return (
         <div>
-          <LoginForm
-            handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
-            handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
-            handleLoginClick={() => this.handleLoginClick()}
-          />
+          <Fade in={!this.state.isLoggedin}>
+            <LoginForm
+              handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
+              handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
+              handleLoginClick={() => this.handleLoginClick()}
+            />
+
+          </Fade>
           {this.renderMessage()}
         </div>
       )
     } else {
       return (
-        <ImageMenuButton />
+        <Fade in={this.state.isLoggedin}>
+          <ImageMenuButton />
+        </Fade>
       )
     }
   }
