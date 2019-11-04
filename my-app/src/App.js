@@ -29,17 +29,17 @@ const buttonImages = [
   },
   {
     url: vivianButton,
-    title: 'Vivian',
+    title: 'Harp',
     width: '100%'
   },
   {
     url: paulButton,
-    title: 'Paul',
+    title: 'Flute',
     width: '100%'
   },
   {
     url: sarahButton,
-    title: 'Sarah',
+    title: 'Voilin',
     width: '100%'
   }
 ]
