@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
   })
 })
 
-// app.use('/', router)
+app.use('/', router)
 app.use('/group', express.static('contactSheets/group', { index: 'index.htm' }))
 app.listen(4000, () => {
   console.log('server has started')
