@@ -39,7 +39,7 @@ const buttonImages = [
   },
   {
     url: sarahButton,
-    title: 'Voilin',
+    title: 'Violin',
     width: '100%'
   }
 ]
