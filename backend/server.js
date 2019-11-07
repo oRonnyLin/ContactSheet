@@ -19,11 +19,21 @@ const router = express.Router()
 
 router.post('/login', async (req, res) => {
   console.log('request body: ', req.body)
-  return res.json({
-    isLoggedin: true,
-    code: 0
-  })
-})
+  const { accountId, password } = req.body
+  let responseBody
+  if (accountId === 'Ronny' && password === '123') {
+    responseBody = {
+      isLoggedin: true,
+      code: 0
+    }
+  } else {
+    responseBody = {
+      code: 1
+    }
+  }
+  return res.json(responseBody)
+}
+)
 
 app.use('/', router)
 app.use('/group', express.static('contactSheets/group', { index: 'index.htm' }))

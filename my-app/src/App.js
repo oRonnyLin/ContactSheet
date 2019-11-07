@@ -1,256 +1,29 @@
 /* global fetch */
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-// import logo from './logo.svg'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation
+} from 'react-router-dom'
 import './App.css'
-import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import ButtonBase from '@material-ui/core/ButtonBase'
 import { makeStyles } from '@material-ui/core/styles'
-import Image from 'material-ui-image'
-import paulButton from './static/images/button/Paulbutton.jpg'
-import vivianButton from './static/images/button/Vivianbutton.jpg'
-import sarahButton from './static/images/button/Sarahbutton.jpg'
-import groupButton from './static/images/button/Groupbutton.jpg'
-import webImage from './static/images/WebImg.jpg'
-import { Fade } from '@material-ui/core'
+import LeftGrid from './components/LeftGrid.js'
+import LoginForm from './components/Login.js'
+import Menu from './components/Menu.js'
+import GroupContactSheet from './groupContact.js'
+import RightGrid from './components/RightGrid.js'
 
-const buttonImages = [
-  {
-    url: groupButton,
-    title: 'Group',
-    width: '100%'
-  },
-  {
-    url: vivianButton,
-    title: 'Harp',
-    width: '100%'
-  },
-  {
-    url: paulButton,
-    title: 'Flute',
-    width: '100%'
-  },
-  {
-    url: sarahButton,
-    title: 'Violin',
-    width: '100%'
-  }
-]
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh'
-  },
-  image: {
-    backgroundImage: `url(${webImage})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    transition: '3000'
-  },
-  paper: {
-    margin: theme.spacing(2, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  test: {
-    // maxWidth: '100%'
-    // // height: '200px',
-    // // // width: '200px',
-    objectFit: 'cover'
-  },
-  buttonImageRoot: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    minWidth: 300,
-    width: '100%',
-    paddingBottom: '5px'
-  },
-  menuRoot: {
-    width: '100%',
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: '20,0,0,0'
-  },
-  buttonImage: {
-    position: 'relative',
-    height: 200,
-    [theme.breakpoints.down('xs')]: {
-      width: '100% !important', // Overrides inline-style
-      height: 100
-    },
-    '&:hover, &$focusVisible': {
-      zIndex: 1,
-      '& $imageBackdrop': {
-        opacity: 0.15
-      },
-      '& $imageMarked': {
-        opacity: 0
-      },
-      '& $imageTitle': {
-        border: '4px solid currentColor'
-      }
-    }
-  },
-  focusVisible: {},
-  imageButton: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white
-  },
-  imageSrc: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%'
-  },
-  imageBackdrop: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0.4,
-    transition: theme.transitions.create('opacity')
-  },
-  imageTitle: {
-    position: 'relative',
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
-    fontSize: '30px'
-  },
-  imageMarked: {
-    height: 3,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: 'absolute',
-    bottom: -2,
-    left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity')
   }
 }))
-
-function Copyright () {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' href='https://www.elysiantrio.com/'>
-        Elysian Trio
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
-
-function LoginForm (props) {
-  const classes = useStyles()
-  return (
-    <form className={classes.form}>
-      <TextField
-        variant='outlined'
-        margin='normal'
-        required
-        fullWidth
-        id='email'
-        label='Username'
-        name='email'
-        autoComplete='email'
-        autoFocus
-        value={props.accountId}
-        onChange={props.handleUserFieldChange}
-      />
-      <TextField
-        variant='outlined'
-        margin='normal'
-        required
-        fullWidth
-        name='password'
-        label='Password'
-        type='password'
-        id='password'
-        autoComplete='current-password'
-        value={props.password}
-        onChange={props.handlePassFieldChange}
-      />
-      <Button
-        fullWidth
-        variant='contained'
-        color='primary'
-        className={classes.submit}
-        onClick={props.handleLoginClick}
-      >
-              Login
-      </Button>
-
-    </form>
-  )
-}
-
-function RightGrid (props) {
-  const classes = useStyles()
-  return (
-    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-      <div className={classes.paper}>
-        <Typography component='h1' variant='h5'>
-            Trio Photo
-        </Typography>
-        {props.children}
-        <Box position='relative' mt={5}>
-          <Copyright />
-        </Box>
-
-      </div>
-    </Grid>
-  )
-}
-
-function LeftGrid (props) {
-  const classes = useStyles()
-
-  return (
-    <Fade in='true'>
-      <Grid item xs={false} sm={4} md={7} className={classes.image}>
-        {/* <Grid item xs={false} sm={4} md={7}> */}
-        {/* <div className='test'> */}
-        {/* <FadeIn height='100%'>
-          {onLoad =>
-            <img objectFit='cover' height='100vh' className={classes.test} onLoad={onLoad} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' />}
-        </FadeIn> */}
-
-        {/* <Image imageStyle={{ objectFit: 'cover' }} style={{ objectFit: 'cover' }} src='https://ronnysresource.s3-us-west-2.amazonaws.com/WebImg2+15.jpg' alt='alt' /> */}
-        {/* </div> */}
-      </Grid>
-    </Fade>
-  )
-}
 
 function GridMain (props) {
   const classes = useStyles()
@@ -262,93 +35,23 @@ function GridMain (props) {
   )
 }
 
-function ImageMenuButton (props) {
-  const classes = useStyles()
+function ProtectedRoute (props) {
   return (
-    <div className={classes.menuRoot}>
-      {buttonImages.map((image, index) => (
-        <div key={index} className={classes.buttonImageRoot}>
-          <Fade in='true'>
-            <ButtonBase
-              focusRipple
-              key={image.title}
-              className={classes.buttonImage}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                width: image.width
-              }}
-            >
-              <Fade in='true'>
-                <span
-                  className={classes.imageSrc}
-                  style={{
-                    backgroundImage: `url(${image.url})`
-                  }}
-                />
-              </Fade>
-              <span className={classes.imageBackdrop} />
-              <span className={classes.imageButton}>
-                <Typography
-                  component='span'
-                  variant='subtitle1'
-                  color='inherit'
-                  className={classes.imageTitle}
-                >
-                  {image.title}
-                  <span className={classes.imageMarked} />
-                </Typography>
-              </span>
-            </ButtonBase>
-          </Fade>
-        </div>
-      ))}
-    </div>
+    <Route
+      path={props.path}
+      render={({ location }) => props.isLoggedin ? (
+        props.children
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/unauthorized',
+            state: { from: location }
+          }}
+        />
+      )}
+    />
   )
 }
-
-// function MenuButton (props) {
-//   const classes = useStyles()
-//   return (
-//     <div>
-//       <Button
-//         fullWidth
-//         variant='contained'
-//         color='primary'
-//         className={classes.submit}
-//         onClick={props.handleLoginClick}
-//       >
-//               Group
-//       </Button>
-//       <Button
-//         fullWidth
-//         variant='contained'
-//         color='primary'
-//         className={classes.submit}
-//         onClick={props.handleLoginClick}
-//       >
-//               Paul
-//       </Button>
-//       <Button
-//         fullWidth
-//         variant='contained'
-//         color='primary'
-//         className={classes.submit}
-//         onClick={props.handleLoginClick}
-//       >
-//               Sarah
-//       </Button>
-//       <Button
-//         fullWidth
-//         variant='contained'
-//         color='primary'
-//         className={classes.submit}
-//         onClick={props.handleLoginClick}
-//       >
-//               Vivian
-//       </Button>
-//     </div>
-//   )
-// }
 
 class App extends React.Component {
   constructor (props) {
@@ -360,7 +63,9 @@ class App extends React.Component {
       isLoggedin: false,
       token: null,
       accountId: '',
-      password: ''
+      password: '',
+      backgroundLoaded: false,
+      logginError: false
     }
     this.handlePassFieldChange = this.handlePassFieldChange.bind(this)
     this.handleUserFieldChange = this.handleUserFieldChange.bind(this)
@@ -384,6 +89,12 @@ class App extends React.Component {
     })
   }
 
+  onBackgroundLoaded () {
+    this.setState({
+      backgroundLoaded: true
+    })
+  }
+
   handleButtonPaul () {
 
   }
@@ -402,8 +113,9 @@ class App extends React.Component {
 
   handleLoginClick () {
     const { accountId, password } = this.state
+    const history = useHistory()
     if (accountId === '' || password === '') {
-      this.setState({ loginMessage: 'accountId and password cannot be empty', success: false })
+      this.setState({ loginMessage: 'accountId and password cannot be empty', logginError: true })
     } else {
       const user = {
         accountId: accountId,
@@ -425,13 +137,14 @@ class App extends React.Component {
             date.setTime(date.getTime() + (1440 * 60 * 1000)) // expires in 1 day
             // cookie.save("savedAltumUser", user, {path: "/", expires: date});
             this.setState({ isLoggedin: true, loginMessage: 'Login Successfully', success: true })
+            history.replace('/menu')
           } else {
-            this.setState({ isLogined: false, loginMessage: 'Wrong username or password', success: false })
+            this.setState({ logginError: true, loginMessage: 'Wrong username or password', success: false })
           }
         })
       }).catch((error) => {
         console.log(error)
-        this.setState({ isLogined: false, loginMessage: 'Internal Server Error', success: false })
+        this.setState({ logginError: true, loginMessage: 'Internal Server Error', success: false })
       })
       // console.log('HERE@@@@@@@@@@@@@@@@@@', user)
       // if (accountId === 'Ronny' && password === '123') {
@@ -449,8 +162,8 @@ class App extends React.Component {
   // }
 
   renderMessage () {
-    if (this.state.isLoggedin) {
-      return (<div><font color='green'>Logged in</font></div>)
+    if (this.state.logginError) {
+      return (<div><font color='green'>{this.state.loginMessage}</font></div>)
     }
   }
 
@@ -458,32 +171,53 @@ class App extends React.Component {
     if (!this.state.isLoggedin) {
       return (
         <div>
-          <Fade in={!this.state.isLoggedin}>
-            <LoginForm
-              handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
-              handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
-              handleLoginClick={() => this.handleLoginClick()}
-            />
-          </Fade>
+          <LoginForm
+            isBGLoaded={this.state.backgroundLoaded}
+            handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
+            handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
+            handleLoginClick={() => this.handleLoginClick()}
+          />
+          {this.renderMessage()}
         </div>
       )
     } else {
       return (
-        <ImageMenuButton />
+        <Menu />
       )
     }
   }
 
   render () {
     return (
+
       <div className='App'>
         <GridMain>
-          <LeftGrid />
-          <RightGrid>
-            {this.renderRightGrid()}
+          <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
+          <RightGrid isBGLoaded={this.state.backgroundLoaded}>
+            <Router>
+              <Route path='/'>
+                <Redirect to='/login' />
+              </Route>
+              <Route path='/login' exact>
+                <LoginForm
+                  isBGLoaded={this.state.backgroundLoaded}
+                  handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
+                  handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
+                  handleLoginClick={() => this.handleLoginClick()}
+                />
+                {this.renderMessage()}
+              </Route>
+              <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin} exact>
+                <Menu />
+              </ProtectedRoute>
+              <Route path='/unauthorized' exact>
+                <p> Sorry you are not authorized</p>
+              </Route>
+            </Router>
           </RightGrid>
         </GridMain>
       </div>
+
     )
   }
 }
