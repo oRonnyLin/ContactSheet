@@ -6,27 +6,32 @@ import groupButton from '../static/images/button/Groupbutton.jpg'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
+import { useHistory } from 'react-router-dom'
 
 const buttonImages = [
   {
     url: groupButton,
     title: 'Group',
-    width: '100%'
+    width: '100%',
+    path: '/group'
   },
   {
     url: vivianButton,
     title: 'Harp',
-    width: '100%'
+    width: '100%',
+    path: '/harp'
   },
   {
     url: paulButton,
     title: 'Flute',
-    width: '100%'
+    width: '100%',
+    path: '/flute'
   },
   {
     url: sarahButton,
     title: 'Violin',
-    width: '100%'
+    width: '100%',
+    path: '/voilin'
   }
 ]
 const useStyles = makeStyles(theme => ({
@@ -112,6 +117,7 @@ const useStyles = makeStyles(theme => ({
 
 function Menu (props) {
   const classes = useStyles()
+  const history = useHistory()
   return (
     <div className={classes.menuRoot}>
       {buttonImages.map((image, index) => (
@@ -125,6 +131,7 @@ function Menu (props) {
             style={{
               width: image.width
             }}
+            onClick={() => { history.push(image.path) }}
           >
             {/* <Fade in='true'> */}
             <span

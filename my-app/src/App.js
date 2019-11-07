@@ -1,13 +1,10 @@
 /* global fetch */
 import React from 'react'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
+  Redirect
 } from 'react-router-dom'
 import './App.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -18,6 +15,8 @@ import LoginForm from './components/Login.js'
 import Menu from './components/Menu.js'
 import GroupContactSheet from './groupContact.js'
 import RightGrid from './components/RightGrid.js'
+import UnauthPage from './components/UnauthPage.js'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -95,6 +94,18 @@ class App extends React.Component {
     })
   }
 
+  setLoginStatus (status) {
+    if (status) {
+      this.setState({
+        isLoggedin: status
+      })
+    } else {
+      this.setState({
+        loggingError: true
+      })
+    }
+  }
+
   handleButtonPaul () {
 
   }
@@ -113,7 +124,7 @@ class App extends React.Component {
 
   handleLoginClick () {
     const { accountId, password } = this.state
-    const history = useHistory()
+    // const history = useHistory()
     if (accountId === '' || password === '') {
       this.setState({ loginMessage: 'accountId and password cannot be empty', logginError: true })
     } else {
@@ -137,7 +148,7 @@ class App extends React.Component {
             date.setTime(date.getTime() + (1440 * 60 * 1000)) // expires in 1 day
             // cookie.save("savedAltumUser", user, {path: "/", expires: date});
             this.setState({ isLoggedin: true, loginMessage: 'Login Successfully', success: true })
-            history.replace('/menu')
+            // history.replace('/menu')
           } else {
             this.setState({ logginError: true, loginMessage: 'Wrong username or password', success: false })
           }
@@ -163,60 +174,57 @@ class App extends React.Component {
 
   renderMessage () {
     if (this.state.logginError) {
-      return (<div><font color='green'>{this.state.loginMessage}</font></div>)
-    }
-  }
-
-  renderRightGrid () {
-    if (!this.state.isLoggedin) {
-      return (
-        <div>
-          <LoginForm
-            isBGLoaded={this.state.backgroundLoaded}
-            handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
-            handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
-            handleLoginClick={() => this.handleLoginClick()}
-          />
-          {this.renderMessage()}
-        </div>
-      )
-    } else {
-      return (
-        <Menu />
-      )
+      return (<div><font color='red'>Wrong username or password</font></div>)
     }
   }
 
   render () {
     return (
-
-      <div className='App'>
-        <GridMain>
-          <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
-          <RightGrid isBGLoaded={this.state.backgroundLoaded}>
-            <Router>
-              <Route path='/'>
-                <Redirect to='/login' />
-              </Route>
-              <Route path='/login' exact>
-                <LoginForm
-                  isBGLoaded={this.state.backgroundLoaded}
-                  handleUserFieldChange={(event) => this.handleUserFieldChange(event)}
-                  handlePassFieldChange={(event) => this.handlePassFieldChange(event)}
-                  handleLoginClick={() => this.handleLoginClick()}
-                />
-                {this.renderMessage()}
-              </Route>
-              <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin} exact>
-                <Menu />
-              </ProtectedRoute>
-              <Route path='/unauthorized' exact>
-                <p> Sorry you are not authorized</p>
-              </Route>
-            </Router>
-          </RightGrid>
-        </GridMain>
-      </div>
+      <Router>
+        <Switch>
+          <Route path='/' exact>
+            <Redirect to='/login' />
+          </Route>
+          <Route path='/group'>
+            <GroupContactSheet />
+          </Route>
+          <Route
+            render={({ location }) => (
+              <TransitionGroup>
+                <CSSTransition
+                  key={location.pathname}
+                  classNames='fade'
+                  timeout={600}
+                >
+                  {/* <div className='App'> */}
+                  <GridMain>
+                    <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
+                    <RightGrid isBGLoaded={this.state.backgroundLoaded}>
+                      <Switch>
+                        <Route path='/login'>
+                          <LoginForm
+                            isBGLoaded={this.state.backgroundLoaded}
+                            onLogin={(status) => { this.setLoginStatus(status) }}
+                            isLoggedin={this.state.isLoggedin}
+                          />
+                          {this.renderMessage()}
+                        </Route>
+                        <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin}>
+                          <Menu />
+                        </ProtectedRoute>
+                        <Route path='/unauthorized'>
+                          <UnauthPage />
+                        </Route>
+                      </Switch>
+                    </RightGrid>
+                  </GridMain>
+                  {/* </div> */}
+                </CSSTransition>
+              </TransitionGroup>
+            )}
+          />
+        </Switch>
+      </Router>
 
     )
   }

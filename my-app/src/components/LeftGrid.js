@@ -25,7 +25,7 @@ class LeftGrid extends React.Component {
     return (
       <Fade in={this.props.isBGLoaded} timeout={this.timeout}>
         <Grid item xs={false} sm={4} md={7} style={this.props.isBGLoaded ? this.style : this.placeHolder}>
-          {this.props.isBGLoaded ? null : <img style={{ display: 'none' }} src={webImage} onLoad={() => { this.props.onBGLoad() }} />}
+          {this.props.isBGLoaded ? null : <img style={{ display: 'none' }} alt='preloader' src={webImage} onLoad={() => { this.props.onBGLoad() }} />}
         </Grid>
       </Fade>
     )
