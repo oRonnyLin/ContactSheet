@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import { useHistory } from 'react-router-dom'
+import { Fade } from '@material-ui/core'
 
 const buttonImages = [
   {
@@ -118,11 +119,17 @@ const useStyles = makeStyles(theme => ({
 function Menu (props) {
   const classes = useStyles()
   const history = useHistory()
+  const placeHolder = {
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#fff'
+  }
+  console.log('Menu component called')
   return (
     <div className={classes.menuRoot}>
       {buttonImages.map((image, index) => (
         <div key={index} className={classes.buttonImageRoot}>
-          {/* <Fade in='true'> */}
+          {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
           <ButtonBase
             focusRipple
             key={image.title}
@@ -133,14 +140,22 @@ function Menu (props) {
             }}
             onClick={() => { history.push(image.path) }}
           >
-            {/* <Fade in='true'> */}
-            <span
-              className={classes.imageSrc}
-              style={{
-                backgroundImage: `url(${image.url})`
-              }}
-            />
-            {/* </Fade> */}
+            <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
+              <span
+                className={classes.imageSrc}
+                style={props.isMenuImageLoaded[image.title] ? {
+                  backgroundImage: `url(${image.url})`
+                } : placeHolder}
+              >
+                {props.isMenuImageLoaded[image.title] ? null
+                  : <img
+                    style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+                      props.setMenuImageLoaded(image.title)
+                      console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
+                    }}
+                    />}
+              </span>
+            </Fade>
             <span className={classes.imageBackdrop} />
             <span className={classes.imageButton}>
               <Typography
@@ -154,7 +169,6 @@ function Menu (props) {
               </Typography>
             </span>
           </ButtonBase>
-          {/* </Fade> */}
         </div>
       ))}
     </div>
