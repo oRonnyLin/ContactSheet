@@ -10,7 +10,10 @@ import { Fade } from '@material-ui/core'
 class LeftGrid extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { loaded: false }
+    this.state = {
+      loaded: false
+    }
+    this.displayImage = null
     this.placeHolder = {
       height: '100%',
       width: '100%',
@@ -23,23 +26,28 @@ class LeftGrid extends React.Component {
       backgroundPosition: 'center'
     }
     this.webImages = [
-      `url(${webImage1})`,
-      `url(${webImage2})`,
-      `url(${webImage3})`,
-      `url(${webImage4})`,
-      `url(${webImage5})`
+      webImage1,
+      webImage2,
+      webImage3,
+      webImage4,
+      webImage5
     ]
     this.timeout = 1000
   }
 
-  render () {
+  setImage () {
     const randImageIdx = Math.floor(Math.random() * 5)
     const webImage = this.webImages[randImageIdx]
-    this.style.backgroundImage = webImage
+    this.style.backgroundImage = `url(${webImage})`
+    this.displayImage = webImage
+  }
+
+  render () {
+    this.setImage()
     return (
       <Fade in={this.props.isBGLoaded} timeout={this.timeout}>
         <Grid item xs={false} sm={4} md={7} style={this.props.isBGLoaded ? this.style : this.placeHolder}>
-          {this.props.isBGLoaded ? null : <img style={{ display: 'none' }} alt='preloader' src={webImage} onLoad={() => { this.props.onBGLoad() }} />}
+          {this.props.isBGLoaded ? null : <img style={{ display: 'none' }} alt='preloader' src={this.displayImage} onLoad={() => { this.props.onBGLoad() }} />}
         </Grid>
       </Fade>
     )
