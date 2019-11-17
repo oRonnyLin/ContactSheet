@@ -260,11 +260,11 @@ class Menu extends React.Component {
 
   render () {
     const { classes, theme } = this.props
+    const image = buttonImages[0]
     return (
-      <div className={classes.menuRoot}>
-        {buttonImages.map((image, index) => (
-          <div key={index} className={classes.buttonImageRoot}>
-            {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
+      <Fade in={this.state[image.title]} timeout={1000}>
+        <div className={classes.menuRoot}>
+          <div className={classes.buttonImageRoot}>
             <ButtonBase
               href={`${image.path}?token=123`}
               focusRipple
@@ -276,22 +276,22 @@ class Menu extends React.Component {
               }}
               target='_blank'
             >
-              <Fade in={this.state[image.title]} timeout={1000}>
-                <span
-                  className={classes.imageSrc}
-                  style={this.state[image.title] ? {
-                    backgroundImage: `url(${image.url})`
-                  } : this.placeHolder}
-                >
-                  {this.state[image.title] ? null
-                    : <img
-                      style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
-                        this.setState({ [image.title]: true })
-                        console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
-                      }}
+
+              <span
+                className={classes.imageSrc}
+                style={this.state[image.title] ? {
+                  backgroundImage: `url(${image.url})`
+                } : this.placeHolder}
+              >
+                {this.state[image.title] ? null
+                  : <img
+                    style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+                      this.setState({ [image.title]: true })
+                      console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+                    }}
                     />}
-                </span>
-              </Fade>
+              </span>
+
               <span className={classes.imageBackdrop} />
               <span className={classes.imageButton}>
                 <Typography
@@ -306,9 +306,58 @@ class Menu extends React.Component {
               </span>
             </ButtonBase>
           </div>
-        ))}
-      </div>
+        </div>
+      </Fade>
     )
+    // return (
+    //   <div className={classes.menuRoot}>
+    //     {buttonImages.map((image, index) => (
+    //       <div key={index} className={classes.buttonImageRoot}>
+    //         {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
+    //         <ButtonBase
+    //           href={`${image.path}?token=123`}
+    //           focusRipple
+    //           key={image.title}
+    //           className={classes.buttonImage}
+    //           focusVisibleClassName={classes.focusVisible}
+    //           style={{
+    //             width: image.width
+    //           }}
+    //           target='_blank'
+    //         >
+    //           <Fade in={this.state[image.title]} timeout={1000}>
+    //             <span
+    //               className={classes.imageSrc}
+    //               style={this.state[image.title] ? {
+    //                 backgroundImage: `url(${image.url})`
+    //               } : this.placeHolder}
+    //             >
+    //               {this.state[image.title] ? null
+    //                 : <img
+    //                   style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+    //                     this.setState({ [image.title]: true })
+    //                     console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+    //                   }}
+    //                 />}
+    //             </span>
+    //           </Fade>
+    //           <span className={classes.imageBackdrop} />
+    //           <span className={classes.imageButton}>
+    //             <Typography
+    //               component='span'
+    //               variant='subtitle1'
+    //               color='inherit'
+    //               className={classes.imageTitle}
+    //             >
+    //               {image.title}
+    //               <span className={classes.imageMarked} />
+    //             </Typography>
+    //           </span>
+    //         </ButtonBase>
+    //       </div>
+    //     ))}
+    //   </div>
+    // )
   }
 }
 
