@@ -32,7 +32,7 @@ const buttonImages = [
     url: sarahButton,
     title: 'Violin',
     width: '100%',
-    path: '/voilin'
+    path: '/violin'
   }
 ]
 const useStyles = makeStyles(theme => ({
@@ -139,6 +139,7 @@ function Menu (props) {
             style={{
               width: image.width
             }}
+            target='_blank'
             // onClick={() => { history.push(image.path) }}
           >
             <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
@@ -154,7 +155,7 @@ function Menu (props) {
                       props.setMenuImageLoaded(image.title)
                       console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
                     }}
-                    />}
+                  />}
               </span>
             </Fade>
             <span className={classes.imageBackdrop} />

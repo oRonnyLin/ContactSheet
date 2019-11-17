@@ -186,16 +186,17 @@ class App extends React.Component {
 
   render () {
     return (
-      <Router>
+
+      <GridMain>
         <div id='preload'>
           <img src={groupButton} alt='preloader' />
           <img src={vivianButton} alt='preloader' />
           <img src={paulButton} alt='preloader' />
           <img src={sarahButton} alt='preloader' />
         </div>
-        <GridMain>
-          <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
-          <RightGrid isBGLoaded={this.state.backgroundLoaded}>
+        <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
+        <RightGrid isBGLoaded={this.state.backgroundLoaded}>
+          <Router>
             <Switch>
               <Route path='/' exact>
                 <Redirect to='/login' />
@@ -218,9 +219,10 @@ class App extends React.Component {
                 <p>testing</p>
               </Route>
             </Switch>
-          </RightGrid>
-        </GridMain>
-      </Router>
+          </Router>
+        </RightGrid>
+      </GridMain>
+
     )
   }
 }
