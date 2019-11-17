@@ -34,13 +34,20 @@ router.post('/login', async (req, res) => {
   return res.json(responseBody)
 }
 )
-
-app.use('/', router)
+const appBackend = express()
+appBackend.use(bodyParser.json())
+appBackend.use(bodyParser.urlencoded({
+  extended: true
+}))
+appBackend.use('/', router)
 app.use('/', express.static('build', { index: 'index.html' }))
-app.use('/group', express.static('group', { index: 'index.htm' }))
-app.use('/harp', express.static('harp', { index: 'index.htm' }))
-app.use('/flute', express.static('flue', { index: 'index.htm' }))
-app.use('/violin', express.static('violin', { index: 'index.htm' }))
+app.use('/group', express.static('contactSheet/group', { index: 'index.htm' }))
+app.use('/harp', express.static('contactSheet/harp', { index: 'index.htm' }))
+app.use('/flute', express.static('contactSheet/flute', { index: 'index.htm' }))
+app.use('/violin', express.static('contactSheet/violin', { index: 'index.htm' }))
+appBackend.listen(5000, () => {
+  console.log('backend server started')
+})
 app.listen(4000, () => {
   console.log('server has started')
 })
