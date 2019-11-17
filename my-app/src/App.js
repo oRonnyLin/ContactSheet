@@ -51,7 +51,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-        )}
+      )}
     />
   )
 }
@@ -101,15 +101,12 @@ class App extends React.Component {
   }
 
   setLoginStatus (status) {
-    console.log('In app setLoginStatus function')
     if (status) {
-      console.log('setting true')
       this.setState({
         isLoggedin: status,
         logginError: false
       })
     } else {
-      console.log('setting false')
       this.setState({
         logginError: true,
         isLoggedin: status
@@ -181,7 +178,6 @@ class App extends React.Component {
   }
 
   renderMessage () {
-    console.log('inside renderMessage, status is: ', this.state.logginError)
     if (this.state.logginError) {
       return (<div><font color='red'>Wrong username or password</font></div>)
     } else {
@@ -224,7 +220,6 @@ class App extends React.Component {
                 <LoginForm
                   // isBGLoaded={this.state.backgroundLoaded}
                   onLogin={(status) => {
-                    console.log('calling prop callback with status ', status)
                     this.setLoginStatus(status)
                   }}
                   isLoggedin={this.state.isLoggedin}
