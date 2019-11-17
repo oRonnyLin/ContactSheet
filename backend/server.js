@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
 
 const router = express.Router()
 
-router.post('/login', async (req, res) => {
+router.post('/credential', async (req, res) => {
   console.log('request body: ', req.body)
   const { accountId, password } = req.body
   let responseBody
