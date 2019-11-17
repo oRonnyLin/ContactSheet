@@ -41,6 +41,8 @@ appBackend.use(bodyParser.urlencoded({
 }))
 appBackend.use('/', router)
 app.use('/', express.static('build', { index: 'index.html' }))
+app.use('/login', express.static('build', { index: 'index.html' }))
+app.use('/menu', express.static('build', { index: 'index.html' }))
 app.use('/group', express.static('contactSheet/group', { index: 'index.htm' }))
 app.use('/harp', express.static('contactSheet/harp', { index: 'index.htm' }))
 app.use('/flute', express.static('contactSheet/flute', { index: 'index.htm' }))
