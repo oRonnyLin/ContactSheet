@@ -51,7 +51,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-      )}
+        )}
     />
   )
 }
@@ -202,6 +202,18 @@ class App extends React.Component {
             <Switch>
               <Route path='/' exact>
                 <Redirect to='/login' />
+              </Route>
+              <Route path='/group' exact>
+                <Redirect to='/unauthorized' />
+              </Route>
+              <Route path='/harp' exact>
+                <Redirect to='/unauthorized' />
+              </Route>
+              <Route path='/flute' exact>
+                <Redirect to='/unauthorized' />
+              </Route>
+              <Route path='/violin' exact>
+                <Redirect to='/unauthorized' />
               </Route>
               <Route path='/login'>
                 <LoginForm
