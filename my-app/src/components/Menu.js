@@ -131,7 +131,7 @@ function Menu (props) {
         <div key={index} className={classes.buttonImageRoot}>
           {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
           <ButtonBase
-            href={`${image.path}?token=123`}
+            href={`${image.path}`}
             focusRipple
             key={image.title}
             className={classes.buttonImage}
@@ -155,7 +155,7 @@ function Menu (props) {
                       props.setMenuImageLoaded(image.title)
                       console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
                     }}
-                  />}
+                    />}
               </span>
             </Fade>
             <span className={classes.imageBackdrop} />
