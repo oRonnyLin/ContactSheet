@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-
+const cors = require('cors')
 app.use(bodyParser.urlencoded({
   extended: true
 }))
@@ -39,6 +39,8 @@ appBackend.use(bodyParser.json())
 appBackend.use(bodyParser.urlencoded({
   extended: true
 }))
+app.use(cors())
+appBackend.use(cors())
 appBackend.use('/', router)
 app.use('/', express.static('build', { index: 'index.html' }))
 app.use('/login', express.static('build', { index: 'index.html' }))

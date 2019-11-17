@@ -27,17 +27,23 @@ function LoginForm (props) {
       accountId: accountId,
       password: password
     }
-    const loginResponse = await fetch('http://54.183.206.9:4000/credential', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
-    })
-    const jsonResponse = await loginResponse.json()
-    console.log(jsonResponse)
-    if (jsonResponse.code === 0) {
-      props.onLogin(true)
-      history.push('/menu')
-    } else {
+    try {
+      const loginResponse = await fetch('http://54.183.206.9:4000/credential', {
+        mode: 'cors',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      })
+      const jsonResponse = await loginResponse.json()
+      console.log(jsonResponse)
+      if (jsonResponse.code === 0) {
+        props.onLogin(true)
+        history.push('/menu')
+      } else {
+        props.onLogin(false)
+      }
+    } catch (error) {
+      console.log('error: ', error)
       props.onLogin(false)
     }
   }

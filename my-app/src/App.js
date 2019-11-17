@@ -180,6 +180,8 @@ class App extends React.Component {
   renderMessage () {
     if (this.state.logginError) {
       return (<div><font color='red'>Wrong username or password</font></div>)
+    } else {
+      return null
     }
   }
 
@@ -210,7 +212,7 @@ class App extends React.Component {
                       onLogin={(status) => { this.setLoginStatus(status) }}
                       isLoggedin={this.state.isLoggedin}
                     />
-                    {/* {this.renderMessage()} */}
+                    {this.renderMessage()}
                   </Route>
                   <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin}>
                     <Menu setMenuImageLoaded={(component) => { this.setMenuImageLoaded(component) }} isMenuImageLoaded={this.state.isMenuImageLoaded} />
