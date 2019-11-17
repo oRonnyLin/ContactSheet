@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import { useHistory } from 'react-router-dom'
 import { Fade } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid'
 
 const buttonImages = [
   {
@@ -267,7 +268,7 @@ class Menu extends React.Component {
             this.setState({ [image.title]: true })
             console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
           }}
-                             />
+        />
           : <div className={classes.menuRoot}>
             <div className={classes.buttonImageRoot}>
               <ButtonBase
@@ -282,7 +283,7 @@ class Menu extends React.Component {
                 target='_blank'
               >
                 <Fade in={this.state[image.title]} timeout={1000}>
-                  <span
+                  <Grid
                     className={classes.imageSrc}
                     style={this.state[image.title] ? {
                       backgroundImage: `url(${image.url})`
@@ -294,8 +295,8 @@ class Menu extends React.Component {
                           this.setState({ [image.title]: true })
                           console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
                         }}
-                      />}
-                  </span>
+                        />}
+                  </Grid>
                 </Fade>
                 <span className={classes.imageBackdrop} />
                 <span className={classes.imageButton}>
@@ -311,7 +312,7 @@ class Menu extends React.Component {
                 </span>
               </ButtonBase>
             </div>
-          </div>}
+            </div>}
       </Fade>
     )
     // return (
