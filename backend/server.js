@@ -36,7 +36,11 @@ router.post('/login', async (req, res) => {
 )
 
 app.use('/', router)
-// app.use('/', express.static('build', { index: 'index.html' }))
+app.use('/', express.static('build', { index: 'index.html' }))
+app.use('/group', express.static('group', { index: 'index.htm' }))
+app.use('/harp', express.static('harp', { index: 'index.htm' }))
+app.use('/flute', express.static('flue', { index: 'index.htm' }))
+app.use('/violin', express.static('violin', { index: 'index.htm' }))
 app.listen(4000, () => {
   console.log('server has started')
 })

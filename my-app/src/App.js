@@ -1,7 +1,7 @@
 /* global fetch */
 import React from 'react'
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   Redirect
@@ -52,7 +52,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-      )}
+        )}
     />
   )
 }
