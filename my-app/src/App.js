@@ -101,14 +101,17 @@ class App extends React.Component {
   }
 
   setLoginStatus (status) {
+    console.log('In app setLoginStatus function')
     if (status) {
+      console.log('setting true')
       this.setState({
         isLoggedin: status,
-        loggingError: false
+        logginError: false
       })
     } else {
+      console.log('setting false')
       this.setState({
-        loggingError: true,
+        logginError: true,
         isLoggedin: status
       })
     }
@@ -178,8 +181,11 @@ class App extends React.Component {
   }
 
   renderMessage () {
+    console.log('inside renderMessage, status is: ', this.state.logginError)
     if (this.state.logginError) {
       return (<div><font color='red'>Wrong username or password</font></div>)
+    } else {
+      return null
     }
   }
 
@@ -217,7 +223,10 @@ class App extends React.Component {
               <Route path='/login'>
                 <LoginForm
                   // isBGLoaded={this.state.backgroundLoaded}
-                  onLogin={(status) => { this.setLoginStatus(status) }}
+                  onLogin={(status) => {
+                    console.log('calling prop callback with status ', status)
+                    this.setLoginStatus(status)
+                  }}
                   isLoggedin={this.state.isLoggedin}
                 />
                 {this.renderMessage()}

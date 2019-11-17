@@ -40,6 +40,7 @@ function LoginForm (props) {
         props.onLogin(true)
         history.push('/menu')
       } else {
+        console.log('Setting state false in login')
         props.onLogin(false)
       }
     } catch (error) {
