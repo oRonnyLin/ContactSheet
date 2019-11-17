@@ -13,7 +13,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import LeftGrid from './components/LeftGrid.js'
 import LoginForm from './components/Login.js'
 import Menu from './components/Menu.js'
-import GroupContactSheet from './groupContact.js'
 import RightGrid from './components/RightGrid.js'
 import UnauthPage from './components/UnauthPage.js'
 import paulButton from './static/images/button/Paulbutton.jpg'
@@ -194,42 +193,34 @@ class App extends React.Component {
           <img src={paulButton} alt='preloader' />
           <img src={sarahButton} alt='preloader' />
         </div>
-        <Switch>
-          <Route path='/' exact>
-            <Redirect to='/login' />
-          </Route>
-          <Route path='/group'>
-            <GroupContactSheet />
-          </Route>
-          <Route>
-            <GridMain>
-              <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
-              <RightGrid isBGLoaded={this.state.backgroundLoaded}>
-                <Switch>
-                  <Route path='/login'>
-                    <LoginForm
-                      isBGLoaded={this.state.backgroundLoaded}
-                      onLogin={(status) => { this.setLoginStatus(status) }}
-                      isLoggedin={this.state.isLoggedin}
-                    />
-                    {this.renderMessage()}
-                  </Route>
-                  <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin}>
-                    <Menu setMenuImageLoaded={(component) => { this.setMenuImageLoaded(component) }} isMenuImageLoaded={this.state.isMenuImageLoaded} />
-                  </ProtectedRoute>
-                  <Route path='/unauthorized'>
-                    <UnauthPage />
-                  </Route>
-                  <Route path='/test'>
-                    <p>testing</p>
-                  </Route>
-                </Switch>
-              </RightGrid>
-            </GridMain>
-          </Route>
-        </Switch>
+        <GridMain>
+          <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
+          <RightGrid isBGLoaded={this.state.backgroundLoaded}>
+            <Switch>
+              <Route path='/' exact>
+                <Redirect to='/login' />
+              </Route>
+              <Route path='/login'>
+                <LoginForm
+                  isBGLoaded={this.state.backgroundLoaded}
+                  onLogin={(status) => { this.setLoginStatus(status) }}
+                  isLoggedin={this.state.isLoggedin}
+                />
+                {this.renderMessage()}
+              </Route>
+              <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin}>
+                <Menu setMenuImageLoaded={(component) => { this.setMenuImageLoaded(component) }} isMenuImageLoaded={this.state.isMenuImageLoaded} />
+              </ProtectedRoute>
+              <Route path='/unauthorized'>
+                <UnauthPage />
+              </Route>
+              <Route path='/test'>
+                <p>testing</p>
+              </Route>
+            </Switch>
+          </RightGrid>
+        </GridMain>
       </Router>
-
     )
   }
 }
