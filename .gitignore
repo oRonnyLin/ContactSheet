@@ -2,6 +2,9 @@
 ContactSheetTrio.zip
 
 backend/contactSheets
+backend/photos
+backend/scripts
+backend/themes
 
 # dependencies
 */node_modules
