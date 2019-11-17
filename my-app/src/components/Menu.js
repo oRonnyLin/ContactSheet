@@ -131,6 +131,7 @@ function Menu (props) {
         <div key={index} className={classes.buttonImageRoot}>
           {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
           <ButtonBase
+            href={image.path}
             focusRipple
             key={image.title}
             className={classes.buttonImage}
@@ -138,7 +139,7 @@ function Menu (props) {
             style={{
               width: image.width
             }}
-            onClick={() => { history.push(image.path) }}
+            // onClick={() => { history.push(image.path) }}
           >
             <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
               <span
