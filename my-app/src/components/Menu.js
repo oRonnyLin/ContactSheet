@@ -3,7 +3,7 @@ import paulButton from '../static/images/button/Paulbutton.jpg'
 import vivianButton from '../static/images/button/Vivianbutton.jpg'
 import sarahButton from '../static/images/button/Sarahbutton.jpg'
 import groupButton from '../static/images/button/Groupbutton.jpg'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withTheme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import { useHistory } from 'react-router-dom'
@@ -116,65 +116,256 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Menu (props) {
-  const classes = useStyles()
-  const history = useHistory()
-  const placeHolder = {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#fff'
+class Menu extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      Group: false,
+      Harp: false,
+      Flute: false,
+      Violin: false
+    }
+    this.placeHolder = {
+      height: '100%',
+      width: '100%',
+      backgroundColor: '#fff'
+    }
+    this.imageMarked = {
+      height: 3,
+      width: 18,
+      backgroundColor: props.theme.palette.common.white,
+      position: 'absolute',
+      bottom: -2,
+      left: 'calc(50% - 9px)',
+      transition: props.theme.transitions.create('opacity')
+    }
+    this.imageTitle = {
+      position: 'relative',
+      padding: `${props.theme.spacing(2)}px ${props.theme.spacing(4)}px ${props.theme.spacing(1) + 6}px`,
+      fontSize: '30px'
+    }
+    this.buttonImageRoot = {
+      display: 'flex',
+      flexWrap: 'wrap',
+      minWidth: 300,
+      width: '100%',
+      paddingBottom: '5px'
+    }
+    this.menuRoot = {
+      width: '100%',
+      display: 'flex',
+      flexWrap: 'wrap',
+      padding: '20,0,0,0'
+    }
+    this.buttonImage = {
+      position: 'relative',
+      height: 200,
+      width: '100%',
+      [props.theme.breakpoints.down('xs')]: {
+        width: '100% !important', // Overrides inline-style
+        height: 100
+      },
+      '&:hover, &$focusVisible': {
+        zIndex: 1,
+        '& $imageBackdrop': {
+          opacity: 0.05
+        },
+        '& $imageMarked': {
+          opacity: 0
+        },
+        '& $imageTitle': {
+          border: '4px solid currentColor'
+        }
+      }
+    }
+    this.focusVisible = {}
+    this.imageButton = {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: props.theme.palette.common.white
+    }
+    this.imageSrc = {
+      Group: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 40%',
+        backgroundImage: `url(${groupButton})`
+      },
+      Harp: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 40%',
+        backgroundImage: `url(${vivianButton})`
+      },
+      Flute: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 40%',
+        backgroundImage: `url(${paulButton})`
+      },
+      Violin: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 40%',
+        backgroundImage: `url(${sarahButton})`
+      }
+    }
+    this.imageSrcPlaceHolder = {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center 40%',
+      height: '100%',
+      width: '100%',
+      backgroundColor: '#fff'
+    }
+    this.imageBackdrop = {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      backgroundColor: props.theme.palette.common.black,
+      opacity: 0.2,
+      transition: props.theme.transitions.create('opacity')
+    }
   }
-  console.log('Menu component called')
-  return (
-    <div className={classes.menuRoot}>
-      {buttonImages.map((image, index) => (
-        <div key={index} className={classes.buttonImageRoot}>
-          {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
-          <ButtonBase
-            href={`${image.path}?token=123`}
-            focusRipple
-            key={image.title}
-            className={classes.buttonImage}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: image.width
-            }}
-            target='_blank'
-            // onClick={() => { history.push(image.path) }}
-          >
-            <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
-              <span
-                className={classes.imageSrc}
-                style={props.isMenuImageLoaded[image.title] ? {
-                  backgroundImage: `url(${image.url})`
-                } : placeHolder}
-              >
-                {props.isMenuImageLoaded[image.title] ? null
-                  : <img
-                    style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
-                      props.setMenuImageLoaded(image.title)
-                      console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
-                    }}
-                    />}
+
+  render () {
+    return (
+      <div style={this.menuRoot}>
+        {buttonImages.map((image, index) => (
+          <div key={index} style={this.buttonImageRoot}>
+            {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
+            <ButtonBase
+              href={`${image.path}?token=123`}
+              focusRipple
+              key={image.title}
+              style={this.buttonImage}
+              focusVisibleClassName={this.focusVisible}
+              // style={{
+              //   width: image.width
+              // }}
+              target='_blank'
+              // onClick={() => { history.push(image.path) }}
+            >
+              <Fade in={this.state[image.title]} timeout={1000}>
+                <span
+                  style={this.state[image.title] ? this.imageSrc[image.title] : this.imageSrcPlaceHolder}
+                >
+                  {this.state[image.title] ? null
+                    : <img
+                      style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+                        this.setState({ [image.title]: true })
+                        console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+                      }}
+                      />}
+                </span>
+              </Fade>
+              <span style={this.imageBackdrop} />
+              <span style={this.imageButton}>
+                <Typography
+                  component='span'
+                  variant='subtitle1'
+                  color='inherit'
+                  style={this.imageTitle}
+                >
+                  {image.title}
+                  <span style={this.imageMarked} />
+                </Typography>
               </span>
-            </Fade>
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-              <Typography
-                component='span'
-                variant='subtitle1'
-                color='inherit'
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <span className={classes.imageMarked} />
-              </Typography>
-            </span>
-          </ButtonBase>
-        </div>
-      ))}
-    </div>
-  )
+            </ButtonBase>
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
-export default Menu
+// function Menu (props) {
+//   const classes = useStyles()
+//   const history = useHistory()
+//   const placeHolder = {
+//     height: '100%',
+//     width: '100%',
+//     backgroundColor: '#fff'
+//   }
+//   console.log('Menu component called')
+//   return (
+//     <div className={classes.menuRoot}>
+//       {buttonImages.map((image, index) => (
+//         <div key={index} className={classes.buttonImageRoot}>
+//           {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
+//           <ButtonBase
+//             href={`${image.path}?token=123`}
+//             focusRipple
+//             key={image.title}
+//             className={classes.buttonImage}
+//             focusVisibleClassName={classes.focusVisible}
+//             style={{
+//               width: image.width
+//             }}
+//             target='_blank'
+//             // onClick={() => { history.push(image.path) }}
+//           >
+//             <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
+//               <span
+//                 className={classes.imageSrc}
+//                 style={props.isMenuImageLoaded[image.title] ? {
+//                   backgroundImage: `url(${image.url})`
+//                 } : placeHolder}
+//               >
+//                 {props.isMenuImageLoaded[image.title] ? null
+//                   : <img
+//                     style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+//                       props.setMenuImageLoaded(image.title)
+//                       console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
+//                     }}
+//                     />}
+//               </span>
+//             </Fade>
+//             <span className={classes.imageBackdrop} />
+//             <span className={classes.imageButton}>
+//               <Typography
+//                 component='span'
+//                 variant='subtitle1'
+//                 color='inherit'
+//                 className={classes.imageTitle}
+//               >
+//                 {image.title}
+//                 <span className={classes.imageMarked} />
+//               </Typography>
+//             </span>
+//           </ButtonBase>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }
+
+export default withTheme(Menu)
