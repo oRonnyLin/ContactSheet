@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
+const path = require('path')
 app.use(bodyParser.urlencoded({
   extended: true
 }))
@@ -49,6 +50,35 @@ app.use('/group', express.static('contactSheets/group', { index: 'index.htm' }))
 app.use('/harp', express.static('contactSheets/harp', { index: 'index.htm' }))
 app.use('/flute', express.static('contactSheets/flute', { index: 'index.htm' }))
 app.use('/violin', express.static('contactSheets/violin', { index: 'index.htm' }))
+
+app.use(express.static(path.join(__dirname, 'build')))
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+app.get('/login', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+app.get('/menu', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+app.get('/group', async function (req, res) {
+  const token = req.query.token
+  console.log('token received: ', token)
+  if (token === '123') {
+    res.sendFile(path.join(__dirname, 'contactSheets/group', 'index.htm'))
+  } else {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  }
+})
+app.get('/harp', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+app.get('/flute', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+app.get('/violin', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 appBackend.listen(4000, () => {
   console.log('backend server started')
 })

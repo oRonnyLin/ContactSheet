@@ -131,7 +131,7 @@ function Menu (props) {
         <div key={index} className={classes.buttonImageRoot}>
           {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
           <ButtonBase
-            href={image.path}
+            href={`${image.path}?token=123`}
             focusRipple
             key={image.title}
             className={classes.buttonImage}
