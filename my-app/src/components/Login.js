@@ -49,7 +49,7 @@ function LoginForm (props) {
   }
   return (
     <form className={classes.form}>
-      <Fade in={props.isBGLoaded} timeout={1000}>
+      <Fade in timeout={1000}>
         <TextField
           variant='outlined'
           margin='normal'
@@ -64,7 +64,7 @@ function LoginForm (props) {
           onChange={(event) => { setAccountId(event.target.value) }}
         />
       </Fade>
-      <Fade in={props.isBGLoaded} timeout={1000}>
+      <Fade in timeout={1000}>
         <TextField
           variant='outlined'
           margin='normal'
@@ -79,7 +79,7 @@ function LoginForm (props) {
           onChange={(event) => { setPassword(event.target.value) }}
         />
       </Fade>
-      <Fade in={props.isBGLoaded} timeout={1000}>
+      <Fade in timeout={1000}>
         <Button
           fullWidth
           variant='contained'

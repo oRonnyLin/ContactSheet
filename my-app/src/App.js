@@ -51,7 +51,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-        )}
+      )}
     />
   )
 }
@@ -194,8 +194,10 @@ class App extends React.Component {
           <img src={paulButton} alt='preloader' />
           <img src={sarahButton} alt='preloader' />
         </div>
-        <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} />
-        <RightGrid isBGLoaded={this.state.backgroundLoaded}>
+        {/* <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} /> */}
+        <LeftGrid />
+        {/* <RightGrid isBGLoaded={this.state.backgroundLoaded}> */}
+        <RightGrid>
           <Router>
             <Switch>
               <Route path='/' exact>
@@ -203,7 +205,7 @@ class App extends React.Component {
               </Route>
               <Route path='/login'>
                 <LoginForm
-                  isBGLoaded={this.state.backgroundLoaded}
+                  // isBGLoaded={this.state.backgroundLoaded}
                   onLogin={(status) => { this.setLoginStatus(status) }}
                   isLoggedin={this.state.isLoggedin}
                 />

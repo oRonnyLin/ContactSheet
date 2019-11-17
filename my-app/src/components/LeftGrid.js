@@ -45,9 +45,9 @@ class LeftGrid extends React.Component {
   render () {
     this.setImage()
     return (
-      <Fade in={this.props.isBGLoaded} timeout={this.timeout}>
-        <Grid item xs={false} sm={4} md={7} style={this.props.isBGLoaded ? this.style : this.placeHolder}>
-          {this.props.isBGLoaded ? null : <img style={{ display: 'none' }} alt='preloader' src={this.displayImage} onLoad={() => { this.props.onBGLoad() }} />}
+      <Fade in={this.state.loaded} timeout={this.timeout}>
+        <Grid item xs={false} sm={4} md={7} style={this.state.loaded ? this.style : this.placeHolder}>
+          {this.state.loaded ? null : <img style={{ display: 'none' }} alt='preloader' src={this.displayImage} onLoad={() => { this.setState({ loaded: true }) }} />}
         </Grid>
       </Fade>
     )

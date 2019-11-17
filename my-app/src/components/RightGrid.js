@@ -40,7 +40,7 @@ function Copyright () {
 function RightGrid (props) {
   const classes = useStyles()
   return (
-    <Fade in={props.isBGLoaded} timeout={1000}>
+    <Fade in timeout={1000}>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.flexColScroll}>
         <div className={classes.paper}>
           <Typography component='h1' variant='h5'>
