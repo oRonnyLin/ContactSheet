@@ -3,7 +3,7 @@ import paulButton from '../static/images/button/Paulbutton.jpg'
 import vivianButton from '../static/images/button/Vivianbutton.jpg'
 import sarahButton from '../static/images/button/Sarahbutton.jpg'
 import groupButton from '../static/images/button/Groupbutton.jpg'
-import { makeStyles, withTheme } from '@material-ui/core/styles'
+import { makeStyles, withTheme, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import { useHistory } from 'react-router-dom'
@@ -35,7 +35,9 @@ const buttonImages = [
     path: '/violin'
   }
 ]
-const useStyles = makeStyles(theme => ({
+
+// makeStyles(
+const useStyles = theme => ({
   buttonImageRoot: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -114,7 +116,7 @@ const useStyles = makeStyles(theme => ({
     left: 'calc(50% - 9px)',
     transition: theme.transitions.create('opacity')
   }
-}))
+})
 
 class Menu extends React.Component {
   constructor (props) {
@@ -257,26 +259,29 @@ class Menu extends React.Component {
   }
 
   render () {
+    const { classes, theme } = this.props
     return (
-      <div style={this.menuRoot}>
+      <div className={classes.menuRoot}>
         {buttonImages.map((image, index) => (
-          <div key={index} style={this.buttonImageRoot}>
+          <div key={index} className={classes.buttonImageRoot}>
             {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
             <ButtonBase
               href={`${image.path}?token=123`}
               focusRipple
               key={image.title}
-              style={this.buttonImage}
-              focusVisibleClassName={this.focusVisible}
-              // style={{
-              //   width: image.width
-              // }}
+              className={classes.buttonImage}
+              focusVisibleClassName={classes.focusVisible}
+              style={{
+                width: image.width
+              }}
               target='_blank'
-              // onClick={() => { history.push(image.path) }}
             >
               <Fade in={this.state[image.title]} timeout={1000}>
                 <span
-                  style={this.state[image.title] ? this.imageSrc[image.title] : this.imageSrcPlaceHolder}
+                  className={classes.imageSrc}
+                  style={this.state[image.title] ? {
+                    backgroundImage: `url(${image.url})`
+                  } : this.placeHolder}
                 >
                   {this.state[image.title] ? null
                     : <img
@@ -284,19 +289,19 @@ class Menu extends React.Component {
                         this.setState({ [image.title]: true })
                         console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
                       }}
-                      />}
+                    />}
                 </span>
               </Fade>
-              <span style={this.imageBackdrop} />
-              <span style={this.imageButton}>
+              <span className={classes.imageBackdrop} />
+              <span className={classes.imageButton}>
                 <Typography
                   component='span'
                   variant='subtitle1'
                   color='inherit'
-                  style={this.imageTitle}
+                  className={classes.imageTitle}
                 >
                   {image.title}
-                  <span style={this.imageMarked} />
+                  <span className={classes.imageMarked} />
                 </Typography>
               </span>
             </ButtonBase>
@@ -306,6 +311,52 @@ class Menu extends React.Component {
     )
   }
 }
+
+// <div style={this.menuRoot}>
+//         {buttonImages.map((image, index) => (
+//           <div key={index} style={this.buttonImageRoot}>
+//             {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
+//             <ButtonBase
+//               href={`${image.path}?token=123`}
+//               focusRipple
+//               key={image.title}
+//               style={this.buttonImage}
+//               focusVisibleClassName={this.focusVisible}
+//               // style={{
+//               //   width: image.width
+//               // }}
+//               target='_blank'
+//               // onClick={() => { history.push(image.path) }}
+//             >
+//               <Fade in={this.state[image.title]} timeout={1000}>
+//                 <span
+//                   style={this.state[image.title] ? this.imageSrc[image.title] : this.imageSrcPlaceHolder}
+//                 >
+//                   {this.state[image.title] ? null
+//                     : <img
+//                       style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+//                         this.setState({ [image.title]: true })
+//                         console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+//                       }}
+//                     />}
+//                 </span>
+//               </Fade>
+//               <span style={this.imageBackdrop} />
+//               <span style={this.imageButton}>
+//                 <Typography
+//                   component='span'
+//                   variant='subtitle1'
+//                   color='inherit'
+//                   style={this.imageTitle}
+//                 >
+//                   {image.title}
+//                   <span style={this.imageMarked} />
+//                 </Typography>
+//               </span>
+//             </ButtonBase>
+//           </div>
+//         ))}
+//       </div>
 
 // function Menu (props) {
 //   const classes = useStyles()
@@ -368,4 +419,4 @@ class Menu extends React.Component {
 //   )
 // }
 
-export default withTheme(Menu)
+export default withStyles(useStyles, { withTheme: true })(Menu)
