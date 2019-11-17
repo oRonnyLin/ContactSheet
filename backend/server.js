@@ -64,6 +64,9 @@ app.get('/login', function (req, res) {
 app.get('/menu', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
+app.get('/unauthorized', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 app.get('/group', async function (req, res) {
   const token = req.query.token
   console.log('[Group]token received: ', token)

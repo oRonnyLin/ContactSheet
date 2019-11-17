@@ -51,7 +51,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-        )}
+      )}
     />
   )
 }
@@ -179,8 +179,6 @@ class App extends React.Component {
   renderMessage () {
     if (this.state.logginError) {
       return (<div><font color='red'>Wrong username or password</font></div>)
-    } else {
-      return null
     }
   }
 
