@@ -65,8 +65,7 @@ app.get('/menu', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 app.get('/group', async function (req, res) {
-  let token = req.query.token
-  token = '123'
+  const token = req.query.token
   console.log('token received: ', token)
   if (token === '123') {
     res.sendFile(path.join(__dirname, 'contactSheets/group', 'index.htm'))
