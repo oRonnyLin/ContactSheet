@@ -66,7 +66,7 @@ app.get('/menu', function (req, res) {
 })
 app.get('/group', async function (req, res) {
   const token = req.query.token
-  console.log('token received: ', token)
+  console.log('[Group]token received: ', token)
   if (token === '123') {
     res.sendFile(path.join(__dirname, 'contactSheets/group', 'index.htm'))
   } else {
@@ -74,13 +74,31 @@ app.get('/group', async function (req, res) {
   }
 })
 app.get('/harp', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  const token = req.query.token
+  console.log('[Harp]token received: ', token)
+  if (token === '123') {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  } else {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  }
 })
 app.get('/flute', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  const token = req.query.token
+  console.log('[Flute]token received: ', token)
+  if (token === '123') {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  } else {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  }
 })
 app.get('/violin', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  const token = req.query.token
+  console.log('[Violin]token received: ', token)
+  if (token === '123') {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  } else {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  }
 })
 appBackend.listen(4000, () => {
   console.log('backend server started')
