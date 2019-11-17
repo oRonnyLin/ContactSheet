@@ -52,9 +52,9 @@ appBackend.use('/', router)
 // app.use('/violin', express.static('contactSheets/violin', { index: 'index.htm' }))
 
 app.use(express.static(path.join(__dirname, 'build')))
-app.use('/group/photos', express.static(path.join(__dirname, 'photos')))
-app.use('/group/scripts', express.static(path.join(__dirname, 'scripts')))
-app.use('/group/theme', express.static(path.join(__dirname, 'theme')))
+app.use('/*photos', express.static(path.join(__dirname, 'photos')))
+app.use('/*scripts', express.static(path.join(__dirname, 'scripts')))
+app.use('/*theme', express.static(path.join(__dirname, 'theme')))
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
