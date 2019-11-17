@@ -51,7 +51,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-      )}
+        )}
     />
   )
 }
@@ -74,6 +74,7 @@ class App extends React.Component {
     this.handlePassFieldChange = this.handlePassFieldChange.bind(this)
     this.handleUserFieldChange = this.handleUserFieldChange.bind(this)
     this.handleLoginClick = this.handleLoginClick.bind(this)
+    this.setLoginStatus = this.setLoginStatus.bind(this)
   }
 
   routeChange () {
