@@ -162,7 +162,6 @@ class Menu extends React.Component {
     this.buttonImage = {
       position: 'relative',
       height: 200,
-      width: '100%',
       [props.theme.breakpoints.down('xs')]: {
         width: '100% !important', // Overrides inline-style
         height: 100
@@ -263,50 +262,56 @@ class Menu extends React.Component {
     const image = buttonImages[0]
     return (
       <Fade in={this.state[image.title]} timeout={1000}>
-        <div className={classes.menuRoot}>
-          <div className={classes.buttonImageRoot}>
-            <ButtonBase
-              href={`${image.path}?token=123`}
-              focusRipple
-              key={image.title}
-              className={classes.buttonImage}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                width: image.width
-              }}
-              target='_blank'
-            >
-
-              <span
-                className={classes.imageSrc}
-                style={this.state[image.title] ? {
-                  backgroundImage: `url(${image.url})`
-                } : this.placeHolder}
+        {!this.state.Group ? <img
+          style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+            this.setState({ [image.title]: true })
+            console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+          }}
+                             />
+          : <div className={classes.menuRoot}>
+            <div className={classes.buttonImageRoot}>
+              <ButtonBase
+                href={`${image.path}?token=123`}
+                focusRipple
+                key={image.title}
+                className={classes.buttonImage}
+                focusVisibleClassName={classes.focusVisible}
+                style={{
+                  width: image.width
+                }}
+                target='_blank'
               >
-                {this.state[image.title] ? null
-                  : <img
-                    style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
-                      this.setState({ [image.title]: true })
-                      console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
-                    }}
-                    />}
-              </span>
-
-              <span className={classes.imageBackdrop} />
-              <span className={classes.imageButton}>
-                <Typography
-                  component='span'
-                  variant='subtitle1'
-                  color='inherit'
-                  className={classes.imageTitle}
-                >
-                  {image.title}
-                  <span className={classes.imageMarked} />
-                </Typography>
-              </span>
-            </ButtonBase>
-          </div>
-        </div>
+                <Fade in={this.state[image.title]} timeout={1000}>
+                  <span
+                    className={classes.imageSrc}
+                    style={this.state[image.title] ? {
+                      backgroundImage: `url(${image.url})`
+                    } : this.placeHolder}
+                  >
+                    {this.state[image.title] ? null
+                      : <img
+                        style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+                          this.setState({ [image.title]: true })
+                          console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+                        }}
+                      />}
+                  </span>
+                </Fade>
+                <span className={classes.imageBackdrop} />
+                <span className={classes.imageButton}>
+                  <Typography
+                    component='span'
+                    variant='subtitle1'
+                    color='inherit'
+                    className={classes.imageTitle}
+                  >
+                    {image.title}
+                    <span className={classes.imageMarked} />
+                  </Typography>
+                </span>
+              </ButtonBase>
+            </div>
+          </div>}
       </Fade>
     )
     // return (
