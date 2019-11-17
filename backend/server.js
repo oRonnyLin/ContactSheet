@@ -47,9 +47,9 @@ app.use('/group', express.static('contactSheet/group', { index: 'index.htm' }))
 app.use('/harp', express.static('contactSheet/harp', { index: 'index.htm' }))
 app.use('/flute', express.static('contactSheet/flute', { index: 'index.htm' }))
 app.use('/violin', express.static('contactSheet/violin', { index: 'index.htm' }))
-appBackend.listen(5000, () => {
+appBackend.listen(4000, () => {
   console.log('backend server started')
 })
-app.listen(4000, () => {
+app.listen(3000, () => {
   console.log('server has started')
 })
