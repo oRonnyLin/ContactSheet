@@ -20,7 +20,7 @@ class LeftGrid extends React.Component {
       backgroundColor: '#fff'
     }
     this.style = {
-      // backgroundImage: `url(${webImage})`,
+      backgroundImage: `url(${webImage2})`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center'
@@ -43,11 +43,11 @@ class LeftGrid extends React.Component {
   }
 
   render () {
-    this.setImage()
+    // this.setImage()
     return (
       <Fade in={this.state.loaded} timeout={this.timeout}>
         <Grid item xs={false} sm={4} md={7} style={this.state.loaded ? this.style : this.placeHolder}>
-          {this.state.loaded ? null : <img style={{ display: 'none' }} alt='preloader' src={this.displayImage} onLoad={() => { this.setState({ loaded: true }) }} />}
+          {this.state.loaded ? null : <img style={{ display: 'none' }} alt='preloader' src={webImage2} onLoad={() => { this.setState({ loaded: true }) }} />}
         </Grid>
       </Fade>
     )
