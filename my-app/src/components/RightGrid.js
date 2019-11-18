@@ -29,7 +29,7 @@ const useStyles = theme => ({
 
 function Copyright () {
   return (
-    <Typography variant='body2' style={{ bottom: '10px' }} color='textSecondary' align='center'>
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
       <Link color='inherit' href='https://www.elysiantrio.com/'>
           Elysian Trio
@@ -40,7 +40,7 @@ function Copyright () {
   )
 }
 
-class RightGridClass extends React.Component {
+class RightGrid extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -58,7 +58,7 @@ class RightGridClass extends React.Component {
                 Trio Photo
             </Typography>
             {this.props.children}
-            <Box flex='1' mt={5}>
+            <Box mt='auto' mb={5}>
               <Copyright />
             </Box>
           </div>
@@ -68,23 +68,4 @@ class RightGridClass extends React.Component {
   }
 }
 
-function RightGrid (props) {
-  const classes = useStyles()
-  return (
-    <Fade in timeout={1000}>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.flexColScroll}>
-        <div className={classes.paper}>
-          <Typography component='h1' variant='h5'>
-              Trio Photo
-          </Typography>
-          {props.children}
-          <Box flex='1' mt={5}>
-            <Copyright />
-          </Box>
-        </div>
-      </Grid>
-    </Fade>
-  )
-}
-
-export default withStyles(useStyles, { withTheme: true })(RightGridClass)
+export default withStyles(useStyles, { withTheme: true })(RightGrid)
