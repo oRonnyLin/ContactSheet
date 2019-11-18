@@ -28,7 +28,7 @@ function LoginForm (props) {
       password: password
     }
     try {
-      const loginResponse = await fetch('http://54.183.206.9:4000/credential', {
+      const loginResponse = await fetch('http://54.241.230.117:4000/credential', {
         mode: 'cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
