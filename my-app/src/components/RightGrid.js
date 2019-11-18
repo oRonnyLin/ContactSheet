@@ -41,6 +41,13 @@ function Copyright () {
 }
 
 class RightGridClass extends React.component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      menuLoaded: false
+    }
+  }
+
   render () {
     const { classes } = this.props
     return (
