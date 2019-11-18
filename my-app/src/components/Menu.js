@@ -49,7 +49,7 @@ const useStyles = theme => ({
     width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
-    padding: '20,0,0,0'
+    padding: '20px 0px 0px 0px'
   },
   buttonImage: {
     position: 'relative',
@@ -173,7 +173,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                  </div>
+                </div>
             }
           </Fade>))}
       </div>
