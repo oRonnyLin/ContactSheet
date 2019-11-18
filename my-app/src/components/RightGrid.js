@@ -40,7 +40,7 @@ function Copyright () {
   )
 }
 
-class RightGridClass extends React.component {
+class RightGridClass extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
