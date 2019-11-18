@@ -3,7 +3,7 @@ import paulButton from '../static/images/button/Paulbutton.jpg'
 import vivianButton from '../static/images/button/Vivianbutton.jpg'
 import sarahButton from '../static/images/button/Sarahbutton.jpg'
 import groupButton from '../static/images/button/Groupbutton.jpg'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withTheme, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import { useHistory } from 'react-router-dom'
@@ -36,7 +36,9 @@ const buttonImages = [
     path: '/violin'
   }
 ]
-const useStyles = makeStyles(theme => ({
+
+// makeStyles(
+const useStyles = theme => ({
   buttonImageRoot: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -117,67 +119,243 @@ const useStyles = makeStyles(theme => ({
     left: 'calc(50% - 9px)',
     transition: theme.transitions.create('opacity')
   }
-}))
+})
 
-function Menu (props) {
-  const classes = useStyles()
-  const history = useHistory()
-  const placeHolder = {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#fff'
+class Menu extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      Group: false,
+      Harp: false,
+      Flute: false,
+      Violin: false
+    }
   }
-  console.log('Menu component called')
-  return (
-    <div className={classes.menuRoot}>
-      {buttonImages.map((image, index) => (
-        <div key={index} className={classes.buttonImageRoot}>
-          {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
-          <ButtonBase
-            href={`${image.path}`}
-            focusRipple
-            key={image.title}
-            className={classes.buttonImage}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: image.width
-            }}
-            target='_blank'
-            // onClick={() => { history.push(image.path) }}
-          >
-            <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
-              <Grid
-                className={classes.imageSrc}
-                style={props.isMenuImageLoaded[image.title] ? {
-                  backgroundImage: `url(${image.url})`
-                } : placeHolder}
-              >
-                {props.isMenuImageLoaded[image.title] ? null
-                  : <img
-                    style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
-                      props.setMenuImageLoaded(image.title)
-                      console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
-                    }}
-                  />}
-              </Grid>
-            </Fade>
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-              <Typography
-                component='span'
-                variant='subtitle1'
-                color='inherit'
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <span className={classes.imageMarked} />
-              </Typography>
-            </span>
-          </ButtonBase>
-        </div>
-      ))}
-    </div>
-  )
+
+  render () {
+    const { classes } = this.props
+    return (
+      <div className={classes.menuRoot}>
+        {buttonImages.map((image, index) => (
+          <Fade key={index} in={this.state[image.title]} timeout={1000}>
+            {!this.state[image.title] ? <img
+              style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+                this.setState({ [image.title]: true })
+                console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+              }}
+                                        />
+              : <div className={classes.buttonImageRoot}>
+
+                <ButtonBase
+                  href={`${image.path}?token=123`}
+                  focusRipple
+                  key={image.title}
+                  className={classes.buttonImage}
+                  focusVisibleClassName={classes.focusVisible}
+                  style={{
+                    width: image.width
+                  }}
+                  target='_blank'
+                >
+                  <Fade in={this.state[image.title]} timeout={1000}>
+                    {/* <Grid
+                    className={classes.imageSrc}
+                    style={this.state[image.title] ? {
+                      backgroundImage: `url(${image.url})`
+                    } : this.placeHolder}
+                  >
+                    {this.state[image.title] ? null
+                      : <img
+                        style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+                          this.setState({ [image.title]: true })
+                          console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+                        }}
+                        />}
+                  </Grid> */}
+                    <Grid
+                      className={classes.imageSrc}
+                      style={{
+                        backgroundImage: `url(${image.url})`
+                      }}
+                    />
+                  </Fade>
+                  <span className={classes.imageBackdrop} />
+                  <span className={classes.imageButton}>
+                    <Typography
+                      component='span'
+                      variant='subtitle1'
+                      color='inherit'
+                      className={classes.imageTitle}
+                    >
+                      {image.title}
+                      <span className={classes.imageMarked} />
+                    </Typography>
+                  </span>
+                </ButtonBase>
+
+                </div>}
+          </Fade>))}
+      </div>
+    )
+    // return (
+    //   <div className={classes.menuRoot}>
+    //     {buttonImages.map((image, index) => (
+    //       <div key={index} className={classes.buttonImageRoot}>
+    //         {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
+    //         <Fade in={this.state[image.title]} timeout={1000}>
+    //           <ButtonBase
+    //             href={`${image.path}?token=123`}
+    //             focusRipple
+    //             key={image.title}
+    //             className={classes.buttonImage}
+    //             focusVisibleClassName={classes.focusVisible}
+    //             style={{
+    //               width: image.width
+    //             }}
+    //             target='_blank'
+    //           >
+
+    //             <Grid
+    //               className={classes.imageSrc}
+    //               style={this.state[image.title] ? {
+    //                 backgroundImage: `url(${image.url})`
+    //               } : this.placeHolder}
+    //             >
+    //               {this.state[image.title] ? null
+    //                 : <img
+    //                   style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+    //                     this.setState({ [image.title]: true })
+    //                     console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+    //                   }}
+    //                   />}
+    //             </Grid>
+
+    //             <span className={classes.imageBackdrop} />
+    //             <span className={classes.imageButton}>
+    //               <Typography
+    //                 component='span'
+    //                 variant='subtitle1'
+    //                 color='inherit'
+    //                 className={classes.imageTitle}
+    //               >
+    //                 {image.title}
+    //                 <span className={classes.imageMarked} />
+    //               </Typography>
+    //             </span>
+    //           </ButtonBase>
+    //         </Fade>
+    //       </div>
+    //     ))}
+    //   </div>
+    // )
+  }
 }
 
-export default Menu
+// <div style={this.menuRoot}>
+//         {buttonImages.map((image, index) => (
+//           <div key={index} style={this.buttonImageRoot}>
+//             {console.log(`${index} is ${image.title} loaded 1: ${this.state[image.title]}`)}
+//             <ButtonBase
+//               href={`${image.path}?token=123`}
+//               focusRipple
+//               key={image.title}
+//               style={this.buttonImage}
+//               focusVisibleClassName={this.focusVisible}
+//               // style={{
+//               //   width: image.width
+//               // }}
+//               target='_blank'
+//               // onClick={() => { history.push(image.path) }}
+//             >
+//               <Fade in={this.state[image.title]} timeout={1000}>
+//                 <span
+//                   style={this.state[image.title] ? this.imageSrc[image.title] : this.imageSrcPlaceHolder}
+//                 >
+//                   {this.state[image.title] ? null
+//                     : <img
+//                       style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+//                         this.setState({ [image.title]: true })
+//                         console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+//                       }}
+//                     />}
+//                 </span>
+//               </Fade>
+//               <span style={this.imageBackdrop} />
+//               <span style={this.imageButton}>
+//                 <Typography
+//                   component='span'
+//                   variant='subtitle1'
+//                   color='inherit'
+//                   style={this.imageTitle}
+//                 >
+//                   {image.title}
+//                   <span style={this.imageMarked} />
+//                 </Typography>
+//               </span>
+//             </ButtonBase>
+//           </div>
+//         ))}
+//       </div>
+
+// function Menu (props) {
+//   const classes = useStyles()
+//   const history = useHistory()
+//   const placeHolder = {
+//     height: '100%',
+//     width: '100%',
+//     backgroundColor: '#fff'
+//   }
+//   console.log('Menu component called')
+//   return (
+//     <div className={classes.menuRoot}>
+//       {buttonImages.map((image, index) => (
+//         <div key={index} className={classes.buttonImageRoot}>
+//           {console.log(`${index} is ${image.title} loaded 1: ${props.isMenuImageLoaded[image.title]}`)}
+//           <ButtonBase
+//             href={`${image.path}?token=123`}
+//             focusRipple
+//             key={image.title}
+//             className={classes.buttonImage}
+//             focusVisibleClassName={classes.focusVisible}
+//             style={{
+//               width: image.width
+//             }}
+//             target='_blank'
+//             // onClick={() => { history.push(image.path) }}
+//           >
+//             <Fade in={props.isMenuImageLoaded[image.title]} timeout={1000}>
+//               <span
+//                 className={classes.imageSrc}
+//                 style={props.isMenuImageLoaded[image.title] ? {
+//                   backgroundImage: `url(${image.url})`
+//                 } : placeHolder}
+//               >
+//                 {props.isMenuImageLoaded[image.title] ? null
+//                   : <img
+//                     style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
+//                       props.setMenuImageLoaded(image.title)
+//                       console.log(`is ${image.title} loaded 2: ${props.isMenuImageLoaded[image.title]}`)
+//                     }}
+//                     />}
+//               </span>
+//             </Fade>
+//             <span className={classes.imageBackdrop} />
+//             <span className={classes.imageButton}>
+//               <Typography
+//                 component='span'
+//                 variant='subtitle1'
+//                 color='inherit'
+//                 className={classes.imageTitle}
+//               >
+//                 {image.title}
+//                 <span className={classes.imageMarked} />
+//               </Typography>
+//             </span>
+//           </ButtonBase>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }
+
+export default withStyles(useStyles, { withTheme: true })(Menu)
