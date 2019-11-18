@@ -4,10 +4,12 @@ import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
+
 import { Fade } from '@material-ui/core'
 
-const useStyles = makeStyles(theme => ({
+// makeStyles(
+const useStyles = theme => ({
   root: {
     height: '100vh'
   },
@@ -23,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
     minHeight: '100%'
   }
-}))
+})
 
 function Copyright () {
   return (
@@ -36,6 +38,27 @@ function Copyright () {
       {'.'}
     </Typography>
   )
+}
+
+class RightGridClass extends React.component {
+  render () {
+    const { classes } = this.props
+    return (
+      <Fade in timeout={1000}>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.flexColScroll}>
+          <div className={classes.paper}>
+            <Typography component='h1' variant='h5'>
+                Trio Photo
+            </Typography>
+            {this.props.children}
+            <Box flex='1' mt={5}>
+              <Copyright />
+            </Box>
+          </div>
+        </Grid>
+      </Fade>
+    )
+  }
 }
 
 function RightGrid (props) {
@@ -57,4 +80,4 @@ function RightGrid (props) {
   )
 }
 
-export default RightGrid
+export default withStyles(useStyles, { withTheme: true })(RightGridClass)
