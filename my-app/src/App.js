@@ -41,7 +41,7 @@ function ProtectedRoute (props) {
       path={props.path}
       exact
       render={({ location }) =>
-        props.isLoggedin ? (
+        sessionStorage.getItem('isLoggedin') === 'true' ? (
           props.children
         ) : (
           <Redirect

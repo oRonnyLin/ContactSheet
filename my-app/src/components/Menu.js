@@ -129,12 +129,12 @@ class Menu extends React.Component {
       Flute: false,
       Violin: false
     }
+    this.token = sessionStorage.getItem('token')
+    console.log('token grabbed at constructor: ', this.token)
   }
 
   render () {
     const { classes } = this.props
-    const token = sessionStorage.getItem('token')
-    console.log('getToken in menu: ', token)
     return (
       <div className={classes.menuRoot}>
         {buttonImages.map((image, index) => (
@@ -144,7 +144,7 @@ class Menu extends React.Component {
                 : <div className={classes.buttonImageRoot}>
 
                   <ButtonBase
-                    href={`${image.path}?token=${token}`}
+                    href={`${image.path}?token=${this.token}`}
                     focusRipple
                     key={image.title}
                     className={classes.buttonImage}
@@ -152,7 +152,7 @@ class Menu extends React.Component {
                     style={{
                       width: image.width
                     }}
-                    target='_blank'
+                    // target='_blank'
                   >
                     <Fade in={this.state[image.title]} timeout={1000}>
                       <Grid
