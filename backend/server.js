@@ -17,16 +17,17 @@ app.use(function (req, res, next) {
 })
 
 const router = express.Router()
-
+const generatedTokens = {}
 router.post('/credential', async (req, res) => {
   console.log('request body: ', req.body)
   const { accountId, password } = req.body
   let responseBody
-  const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-  console.log('what is generated token: ', token)
+
   if (accountId === 'Ronny' && password === '123') {
+    const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    generatedTokens[token] = new Date()
     responseBody = {
-      isLoggedin: true,
+      token: token,
       code: 0
     }
   } else {

@@ -38,6 +38,7 @@ function LoginForm (props) {
       console.log(jsonResponse)
       if (jsonResponse.code === 0) {
         props.onLogin(true)
+        sessionStorage.setItem('token', jsonResponse.token)
         history.push('/menu')
       } else {
         props.onLogin(false)

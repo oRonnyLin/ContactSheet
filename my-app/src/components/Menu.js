@@ -133,6 +133,8 @@ class Menu extends React.Component {
 
   render () {
     const { classes } = this.props
+    const token = sessionStorage.getItem('token')
+    console.log('getToken in menu: ', token)
     return (
       <div className={classes.menuRoot}>
         {buttonImages.map((image, index) => (
