@@ -137,62 +137,44 @@ class Menu extends React.Component {
       <div className={classes.menuRoot}>
         {buttonImages.map((image, index) => (
           <Fade key={index} in={this.state[image.title]} timeout={1000}>
-            {!this.state[image.title] ? <img
-              style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
-                this.setState({ [image.title]: true })
-                console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
-              }}
-                                        />
-              : <div className={classes.buttonImageRoot}>
+            {
+              !this.state[image.title] ? <img style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => { this.setState({ [image.title]: true }) }} />
+                : <div className={classes.buttonImageRoot}>
 
-                <ButtonBase
-                  href={`${image.path}?token=123`}
-                  focusRipple
-                  key={image.title}
-                  className={classes.buttonImage}
-                  focusVisibleClassName={classes.focusVisible}
-                  style={{
-                    width: image.width
-                  }}
-                  target='_blank'
-                >
-                  <Fade in={this.state[image.title]} timeout={1000}>
-                    {/* <Grid
-                    className={classes.imageSrc}
-                    style={this.state[image.title] ? {
-                      backgroundImage: `url(${image.url})`
-                    } : this.placeHolder}
+                  <ButtonBase
+                    href={`${image.path}?token=123`}
+                    focusRipple
+                    key={image.title}
+                    className={classes.buttonImage}
+                    focusVisibleClassName={classes.focusVisible}
+                    style={{
+                      width: image.width
+                    }}
+                    target='_blank'
                   >
-                    {this.state[image.title] ? null
-                      : <img
-                        style={{ display: 'none' }} alt='preloader' src={image.url} onLoad={() => {
-                          this.setState({ [image.title]: true })
-                          console.log(`is ${image.title} loaded 2: ${this.state[image.title]}`)
+                    <Fade in={this.state[image.title]} timeout={1000}>
+                      <Grid
+                        className={classes.imageSrc}
+                        style={{
+                          backgroundImage: `url(${image.url})`
                         }}
-                        />}
-                  </Grid> */}
-                    <Grid
-                      className={classes.imageSrc}
-                      style={{
-                        backgroundImage: `url(${image.url})`
-                      }}
-                    />
-                  </Fade>
-                  <span className={classes.imageBackdrop} />
-                  <span className={classes.imageButton}>
-                    <Typography
-                      component='span'
-                      variant='subtitle1'
-                      color='inherit'
-                      className={classes.imageTitle}
-                    >
-                      {image.title}
-                      <span className={classes.imageMarked} />
-                    </Typography>
-                  </span>
-                </ButtonBase>
-
-                </div>}
+                      />
+                    </Fade>
+                    <span className={classes.imageBackdrop} />
+                    <span className={classes.imageButton}>
+                      <Typography
+                        component='span'
+                        variant='subtitle1'
+                        color='inherit'
+                        className={classes.imageTitle}
+                      >
+                        {image.title}
+                        <span className={classes.imageMarked} />
+                      </Typography>
+                    </span>
+                  </ButtonBase>
+                  </div>
+            }
           </Fade>))}
       </div>
     )

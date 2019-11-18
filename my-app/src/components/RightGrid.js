@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: '100vh'
   },
   flexColScroll: {
     flexGrow: '1',
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 function Copyright () {
   return (
-    <Typography variant='body2' color='textSecondary' align='center'>
+    <Typography variant='body2' style={{ bottom: '10px' }} color='textSecondary' align='center'>
       {'Copyright © '}
       <Link color='inherit' href='https://www.elysiantrio.com/'>
           Elysian Trio
@@ -47,7 +48,7 @@ function RightGrid (props) {
               Trio Photo
           </Typography>
           {props.children}
-          <Box position='relative' mt={5}>
+          <Box flex='1' mt={5}>
             <Copyright />
           </Box>
         </div>
