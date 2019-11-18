@@ -1,4 +1,3 @@
-/* global fetch */
 import React from 'react'
 import {
   BrowserRouter as Router,
@@ -51,7 +50,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-      )}
+        )}
     />
   )
 }
@@ -62,42 +61,14 @@ class App extends React.Component {
     // const { cookies } = props;
     this.state = {
       isLoggedin: false,
-      backgroundLoaded: false,
-      logginError: false,
-      isMenuImageLoaded: {
-        Group: false,
-        Harp: false,
-        Flute: false,
-        Violin: false
-      }
+      logginError: false
     }
-    this.handlePassFieldChange = this.handlePassFieldChange.bind(this)
-    this.handleUserFieldChange = this.handleUserFieldChange.bind(this)
-    this.handleLoginClick = this.handleLoginClick.bind(this)
     this.setLoginStatus = this.setLoginStatus.bind(this)
   }
 
   routeChange () {
     const path = 'newPath'
     this.props.history.push(path)
-  }
-
-  handleUserFieldChange (event) {
-    this.setState({
-      accountId: event.target.value
-    })
-  }
-
-  handlePassFieldChange (event) {
-    this.setState({
-      password: event.target.value
-    })
-  }
-
-  onBackgroundLoaded () {
-    this.setState({
-      backgroundLoaded: true
-    })
   }
 
   setLoginStatus (status) {
@@ -114,72 +85,9 @@ class App extends React.Component {
     }
   }
 
-  setMenuImageLoaded (component) {
-    this.setState(prevState => ({
-      isMenuImageLoaded: {
-        ...prevState.isMenuImageLoaded,
-        [component]: true
-      }
-    }))
-  }
-
-  handleButtonPaul () {
-
-  }
-
-  handleButtonVivian () {
-
-  }
-
-  handleButtonSarah () {
-
-  }
-
-  handleButtonGroup () {
-
-  }
-
-  handleLoginClick () {
-    const { accountId, password } = this.state
-    // const history = useHistory()
-    if (accountId === '' || password === '') {
-      this.setState({ loginMessage: 'accountId and password cannot be empty', logginError: true })
-    } else {
-      const user = {
-        accountId: accountId,
-        password: password
-      }
-      fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-
-      }).then((response) => {
-        if (response.status >= 400) {
-          throw new Error('Bad response from server')
-        }
-        response.json().then((data) => {
-          console.log(data)
-          if (data.code === 0) { // security leak, should use token and get page?
-            const date = new Date()
-            date.setTime(date.getTime() + (1440 * 60 * 1000)) // expires in 1 day
-            // cookie.save("savedAltumUser", user, {path: "/", expires: date});
-            this.setState({ isLoggedin: true, loginMessage: 'Login Successfully', success: true })
-            // history.replace('/menu')
-          } else {
-            this.setState({ logginError: true, loginMessage: 'Wrong username or password', success: false })
-          }
-        })
-      }).catch((error) => {
-        console.log(error)
-        this.setState({ logginError: true, loginMessage: 'Internal Server Error', success: false })
-      })
-    }
-  }
-
   renderMessage () {
     if (this.state.logginError) {
-      return (<div><font color='red'>Wrong username or password</font></div>)
+      return (<div><font color='red'>Something went wrong, please check if password or username is correct</font></div>)
     } else {
       return null
     }
@@ -195,9 +103,7 @@ class App extends React.Component {
           <img src={paulButton} alt='preloader' />
           <img src={sarahButton} alt='preloader' />
         </div>
-        {/* <LeftGrid onBGLoad={() => { this.onBackgroundLoaded() }} isBGLoaded={this.state.backgroundLoaded} /> */}
         <LeftGrid />
-        {/* <RightGrid isBGLoaded={this.state.backgroundLoaded}> */}
         <RightGrid>
           <Router>
             <Switch>
@@ -227,7 +133,7 @@ class App extends React.Component {
                 {this.renderMessage()}
               </Route>
               <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin}>
-                <Menu setMenuImageLoaded={(component) => { this.setMenuImageLoaded(component) }} isMenuImageLoaded={this.state.isMenuImageLoaded} />
+                <Menu />
               </ProtectedRoute>
               <Route path='/unauthorized'>
                 <UnauthPage />

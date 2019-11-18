@@ -22,6 +22,8 @@ router.post('/credential', async (req, res) => {
   console.log('request body: ', req.body)
   const { accountId, password } = req.body
   let responseBody
+  const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  console.log('what is generated token: ', token)
   if (accountId === 'Ronny' && password === '123') {
     responseBody = {
       isLoggedin: true,
