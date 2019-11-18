@@ -73,7 +73,7 @@ app.get('/unauthorized', function (req, res) {
 app.get('/group', async function (req, res) {
   const token = req.query.token
   console.log('[Group]token received: ', token)
-  if (token === '123') {
+  if (generatedTokens[token]) {
     res.sendFile(path.join(__dirname, 'contactSheets/group', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
@@ -82,7 +82,7 @@ app.get('/group', async function (req, res) {
 app.get('/harp', function (req, res) {
   const token = req.query.token
   console.log('[Harp]token received: ', token)
-  if (token === '123') {
+  if (generatedTokens[token]) {
     res.sendFile(path.join(__dirname, 'contactSheets/harp', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
@@ -91,7 +91,7 @@ app.get('/harp', function (req, res) {
 app.get('/flute', function (req, res) {
   const token = req.query.token
   console.log('[Flute]token received: ', token)
-  if (token === '123') {
+  if (generatedTokens[token]) {
     res.sendFile(path.join(__dirname, 'contactSheets/flute', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
@@ -100,7 +100,7 @@ app.get('/flute', function (req, res) {
 app.get('/violin', function (req, res) {
   const token = req.query.token
   console.log('[Violin]token received: ', token)
-  if (token === '123') {
+  if (generatedTokens[token]) {
     res.sendFile(path.join(__dirname, 'contactSheets/violin', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))

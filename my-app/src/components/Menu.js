@@ -144,7 +144,7 @@ class Menu extends React.Component {
                 : <div className={classes.buttonImageRoot}>
 
                   <ButtonBase
-                    href={`${image.path}?token=123`}
+                    href={`${image.path}?token=${token}`}
                     focusRipple
                     key={image.title}
                     className={classes.buttonImage}
@@ -175,7 +175,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                </div>
+                  </div>
             }
           </Fade>))}
       </div>
