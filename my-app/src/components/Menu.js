@@ -14,25 +14,29 @@ const buttonImages = [
     url: groupButton,
     title: 'Group',
     width: '100%',
-    path: '/group'
+    path: '/group',
+    height: '100%'
   },
   {
     url: vivianButton,
     title: 'Harp',
     width: '100%',
-    path: '/harp'
+    path: '/harp',
+    height: '100%'
   },
   {
     url: paulButton,
     title: 'Flute',
     width: '100%',
-    path: '/flute'
+    path: '/flute',
+    height: '100%'
   },
   {
     url: sarahButton,
     title: 'Viola',
     width: '100%',
-    path: '/viola'
+    path: '/viola',
+    height: '100%'
   }
 ]
 
@@ -53,7 +57,7 @@ const useStyles = theme => ({
   },
   buttonImage: {
     position: 'relative',
-
+    minHeight: '200px',
     [theme.breakpoints.down('xs')]: {
       width: '100% !important', // Overrides inline-style
       height: 100
@@ -151,7 +155,7 @@ class Menu extends React.Component {
                     focusVisibleClassName={classes.focusVisible}
                     style={{
                       width: image.width,
-                      minHeight: image.height
+                      height: image.height
                     }}
                     // target='_blank'
                   >
@@ -176,7 +180,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                </div>
+                  </div>
             }
           </Fade>))}
       </div>
