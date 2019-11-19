@@ -146,6 +146,11 @@ httpRerouteApp.use(function (req, res, next) {
   next()
 })
 
+// catch routes that are not the above
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+
 const options = {
   key: fs.readFileSync('ssl/private.key', 'utf8'),
   cert: fs.readFileSync('ssl/certificate.crt', 'utf8'),
