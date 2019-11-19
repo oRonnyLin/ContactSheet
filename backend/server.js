@@ -149,4 +149,8 @@ const options = {
   ca: fs.readFileSync('ssl/ca_bundle.crt', 'utf8')
 }
 
+app.listen(80, () => {
+  console.log('http server ready at 80')
+})
+
 https.createServer(options, app).listen(443, () => console.log('https server ready at 443!'))
