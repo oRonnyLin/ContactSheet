@@ -50,7 +50,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-        )}
+      )}
     />
   )
 }
@@ -61,14 +61,22 @@ class App extends React.Component {
     // const { cookies } = props;
     this.state = {
       isLoggedin: false,
-      logginError: false
+      logginError: false,
+      loadMenuPage: false
     }
     this.setLoginStatus = this.setLoginStatus.bind(this)
+    this.setLoadMenuPage = this.setLoadMenuPage.bind(this)
   }
 
   routeChange () {
     const path = 'newPath'
     this.props.history.push(path)
+  }
+
+  setLoadMenuPage (status) {
+    this.setState({
+      loadMenuPage: true
+    })
   }
 
   setLoginStatus (status) {
@@ -104,7 +112,7 @@ class App extends React.Component {
           <img src={sarahButton} alt='preloader' />
         </div>
         <LeftGrid />
-        <RightGrid>
+        <RightGrid isMenuPageLoaded={this.state.loadMenuPage}>
           <Router>
             <Switch>
               <Route path='/' exact>
@@ -133,7 +141,7 @@ class App extends React.Component {
                 {this.renderMessage()}
               </Route>
               <ProtectedRoute path='/menu' isLoggedin={this.state.isLoggedin}>
-                <Menu />
+                <Menu setLoadMenuPage={(status) => { this.setLoadMenuPage(status) }} />
               </ProtectedRoute>
               <Route path='/unauthorized'>
                 <UnauthPage />

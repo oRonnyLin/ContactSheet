@@ -5,6 +5,8 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import { Fade } from '@material-ui/core'
 
@@ -17,13 +19,20 @@ const useStyles = theme => ({
     margin: theme.spacing(2, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    alignItems: 'center'
   },
   flexColScroll: {
     flexGrow: '1',
     overflow: 'auto',
     minHeight: '100%'
+  },
+  backButton: {
+    padding: '3px'
+  },
+  hidden: {
+    visibility: 'hidden',
+    padding: '3px'
   }
 })
 
@@ -41,22 +50,38 @@ function Copyright () {
 }
 
 class RightGrid extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      menuLoaded: false
-    }
-  }
-
   render () {
     const { classes } = this.props
     return (
       <Fade in timeout={1000}>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.flexColScroll}>
           <div className={classes.paper}>
-            <Typography component='h1' variant='h5'>
+            {/* <Button style={{ float: 'left', width: '20px' }}>test</Button> */}
+            <Grid
+              container
+              direction='row'
+              justify='space-between'
+              alignItems='flex-start'
+            >
+              <Grid>
+                <Fade in={this.props.isMenuPageLoaded}>
+                  <Button className={classes.backButton} aria-label='delete'>
+                    <ArrowBackIcon />
+                  </Button>
+                </Fade>
+              </Grid>
+              <Grid>
+                <Typography component='h1' variant='h5'>
                 Trio Photo
-            </Typography>
+                </Typography>
+              </Grid>
+              <Grid>
+                <Button className={classes.hidden} aria-label='delete'>
+                  <ArrowBackIcon />
+                </Button>
+              </Grid>
+            </Grid>
+
             {this.props.children}
             <Box mt='auto' mb={5}>
               <Copyright />

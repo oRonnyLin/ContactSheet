@@ -26,11 +26,32 @@ router.post('/credential', async (req, res) => {
   if (accountId === 'Ronny' && password === '123') {
     const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     generatedTokens[token] = new Date()
+    console.log(`token generated: ${token} at ${generatedTokens[token]}`)
     responseBody = {
       token: token,
       code: 0
     }
   } else {
+    responseBody = {
+      code: 1
+    }
+  }
+  return res.json(responseBody)
+}
+)
+router.delete('/logout', async (req, res) => {
+  console.log('request body: ', req.body)
+  const { token } = req.body
+  let responseBody
+  try {
+    if (generatedTokens[token]) {
+      delete generatedTokens.token
+      console.log(`token deleted: ${token}`)
+      responseBody = {
+        code: 0
+      }
+    }
+  } catch (error) {
     responseBody = {
       code: 1
     }

@@ -1,3 +1,4 @@
+/* global fetch */
 import React from 'react'
 import paulButton from '../static/images/button/Paulbutton.jpg'
 import vivianButton from '../static/images/button/Vivianbutton.jpg'
@@ -130,7 +131,28 @@ class Menu extends React.Component {
       Violin: false
     }
     this.token = sessionStorage.getItem('token')
-    console.log('token grabbed at constructor: ', this.token)
+    this.props.setLoadMenuPage(true)
+  }
+
+  async componentWillUnmount () {
+    this.props.setLoadMenuPage(false)
+    if (this.token) {
+      try {
+        const clearTokenRequest = await fetch('http://54.241.230.117:4000/logout', {
+          mode: 'cors',
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: this.token })
+        })
+        const jsonResponse = await clearTokenRequest.json()
+        if (jsonResponse.code === '0') {
+          sessionStorage.removeItem('isLoggedin')
+          sessionStorage.removeItem('token')
+        }
+      } catch (error) {
+        console.log('Error at clearTokenRequest: ', error)
+      }
+    }
   }
 
   render () {
@@ -175,7 +197,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                  </div>
+                </div>
             }
           </Fade>))}
       </div>
