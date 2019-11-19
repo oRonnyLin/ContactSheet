@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const path = require('path')
 const https = require('https')
+const http = require('http')
 const fs = require('fs')
 
 // backend
@@ -137,7 +138,8 @@ app.get('/viola', function (req, res) {
 // })
 
 // reroute http to https
-app.use(function (req, res, next) {
+const httpRerouteApp = express()
+httpRerouteApp.use(function (req, res, next) {
   if (!req.secure) {
     return res.redirect(['https://', req.get('Host'), req.url].join(''))
   }
@@ -150,8 +152,9 @@ const options = {
   ca: fs.readFileSync('ssl/ca_bundle.crt', 'utf8')
 }
 
-app.listen(80, () => {
-  console.log('http server ready at 80')
-})
+// set up a route to redirect http to https
+
+// have it listen on 8080
+http.createServer(httpRerouteApp).listen(80, () => console.log('http server ready at 80'))
 
 https.createServer(options, app).listen(443, () => console.log('https server ready at 443!'))

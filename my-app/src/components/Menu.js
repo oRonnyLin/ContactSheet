@@ -53,10 +53,10 @@ const useStyles = theme => ({
   },
   buttonImage: {
     position: 'relative',
-    // height: 200,
+    height: '20vh',
     [theme.breakpoints.down('xs')]: {
-      width: '100% !important' // Overrides inline-style
-      // height: 100
+      width: '100% !important', // Overrides inline-style
+      height: 100
     },
     '&:hover, &$focusVisible': {
       zIndex: 1,
