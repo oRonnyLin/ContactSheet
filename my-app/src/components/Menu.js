@@ -53,7 +53,7 @@ const useStyles = theme => ({
   },
   buttonImage: {
     position: 'relative',
-    minHeight: '200px',
+
     [theme.breakpoints.down('xs')]: {
       width: '100% !important', // Overrides inline-style
       height: 100
@@ -151,7 +151,7 @@ class Menu extends React.Component {
                     focusVisibleClassName={classes.focusVisible}
                     style={{
                       width: image.width,
-                      minHeight: '200px'
+                      minHeight: image.height
                     }}
                     // target='_blank'
                   >
