@@ -14,7 +14,7 @@ router.post('/credential', async (req, res) => {
   const { accountId, password } = req.body
   let responseBody
 
-  if (accountId === 'Ronny' && password === '123') {
+  if (accountId === 'ChamberMusic' && password === 'Trio123!') {
     const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     generatedTokens[token] = new Date()
     console.log(`token generated: ${token} at ${generatedTokens[token]}`)
@@ -50,16 +50,18 @@ router.delete('/logout', async (req, res) => {
   return res.json(responseBody)
 }
 )
-const appBackend = express()
-appBackend.use(bodyParser.json())
-appBackend.use(bodyParser.urlencoded({
-  extended: true
-}))
-appBackend.use(cors())
-appBackend.use('/', router)
-appBackend.listen(4000, () => {
-  console.log('4000 backend server started')
-})
+
+// used for opening another listener at diff port
+// const appBackend = express()
+// appBackend.use(bodyParser.json())
+// appBackend.use(bodyParser.urlencoded({
+//   extended: true
+// }))
+// appBackend.use(cors())
+// appBackend.use('/', router)
+// appBackend.listen(4000, () => {
+//   console.log('4000 backend server started')
+// })
 
 // frontend
 app.use(bodyParser.urlencoded({
@@ -129,11 +131,18 @@ app.get('/viola', function (req, res) {
   }
 })
 
-app.listen(3000, () => {
-  console.log('3000 server has started')
+// app.listen(3000, () => {
+//   console.log('3000 server has started')
+// })
+
+// reroute http to https
+app.use(function (req, res, next) {
+  if (!req.secure) {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''))
+  }
+  next()
 })
 
-// For Amazon EC2 instance usage
 const options = {
   key: fs.readFileSync('ssl/private.key', 'utf8'),
   cert: fs.readFileSync('ssl/certificate.crt', 'utf8'),
