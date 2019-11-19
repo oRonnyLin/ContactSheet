@@ -197,7 +197,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                </div>
+                  </div>
             }
           </Fade>))}
       </div>

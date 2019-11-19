@@ -36,6 +36,7 @@ function GridMain (props) {
 }
 
 function ProtectedRoute (props) {
+  console.log('sessionStorage in Protected route: ', sessionStorage.getItem('isLoggedin'))
   return (
     <Route
       path={props.path}
@@ -74,6 +75,7 @@ class App extends React.Component {
   }
 
   setLoadMenuPage (status) {
+    console.log('loadMenuPage set to ', status)
     this.setState({
       loadMenuPage: true
     })
