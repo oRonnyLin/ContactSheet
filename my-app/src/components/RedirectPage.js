@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Fade } from '@material-ui/core'
+import WarningRoundedIcon from '@material-ui/icons/WarningRounded'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,8 +32,8 @@ function RedirectPage (props) {
   return (
     <Fade in>
       <div className={classes.paper}>
-
-        <Typography component='h1' variant='h4' gutterBottom>
+        <WarningRoundedIcon transform='scale(2)' />
+        <Typography component='body1' variant='body1' style={{ margin: '20px' }} gutterBottom>
           {props.Message}
           {/* Oops, you need to login first. */}
         </Typography>

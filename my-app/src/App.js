@@ -144,10 +144,10 @@ class App extends React.Component {
                 <Menu setLoadMenuPage={(status) => { this.setLoadMenuPage(status) }} />
               </ProtectedRoute>
               <Route path='/unauthorized'>
-                <RedirectPage Message='Oops, you need to login first.' />
+                <RedirectPage Message='Session may have expired or you have not logged in, please try logging in.' />
               </Route>
               <Route>
-                <RedirectPage Message='Oops, We can not find that page. Please login.' />
+                <RedirectPage Message='We can not find that page, please start by logging in.' />
               </Route>
             </Switch>
           </Router>
