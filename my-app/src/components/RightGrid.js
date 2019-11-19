@@ -50,53 +50,15 @@ function Copyright () {
   )
 }
 
-/* <Grid
-              container
-              direction='row'
-              justify='space-between'
-              alignItems='flex-start'
-            >
-              <Grid>
-                <Fade in={this.props.isMenuPageLoaded}>
-                  <Button
-                    onClick={() => {
-                      fetch('http://54.241.230.117:4000/logout', {
-                        mode: 'cors',
-                        method: 'DELETE',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: sessionStorage.getItem('token') })
-                      }).then(() => {
-                        sessionStorage.clear()
-                        window.location.assign('/login')
-                      })
-                    }} style={{ padding: '3px' }} aria-label='delete'
-                  >
-                    <ArrowBackIcon />
-                  </Button>
-                </Fade>
-              </Grid>
-              <Grid>
-                <Typography component='h1' variant='h5'>
-                Trio Photo
-                </Typography>
-              </Grid>
-              <Grid>
-                <Button className={classes.hidden} aria-label='delete'>
-                  <ArrowBackIcon />
-                </Button>
-              </Grid>
-            </Grid> */
-
 class RightGrid extends React.Component {
   render () {
     const { classes } = this.props
-    console.log('isMenuPageLoaded ', this.props.isMenuPageLoaded)
     return (
       <Fade in timeout={1000}>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.flexColScroll}>
           <div className={classes.paper}>
             {this.props.isMenuPageLoaded
-              ? <Fade in>
+              ? <Fade in timeout={1000}>
                 <Button
                   fullWidth
                   onClick={() => {
@@ -113,10 +75,10 @@ class RightGrid extends React.Component {
                 >
                   <ArrowBackIcon />
                 </Button>
-              </Fade>
+                </Fade>
               : <Typography component='h1' variant='h5'>
                 Trio Photo
-              </Typography>}
+                </Typography>}
             {/* <Grid
               container
               direction='row'

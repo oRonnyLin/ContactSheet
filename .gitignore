@@ -5,6 +5,7 @@ backend/contactSheets
 backend/photos
 backend/scripts
 backend/themes
+backend/ssl
 
 # dependencies
 */node_modules

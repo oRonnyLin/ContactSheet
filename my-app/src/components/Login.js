@@ -35,7 +35,6 @@ function LoginForm (props) {
         body: JSON.stringify(user)
       })
       const jsonResponse = await loginResponse.json()
-      console.log(jsonResponse)
       if (jsonResponse.code === 0) {
         props.onLogin(true)
         sessionStorage.setItem('token', jsonResponse.token)
@@ -45,7 +44,6 @@ function LoginForm (props) {
         props.onLogin(false)
       }
     } catch (error) {
-      console.log('error: ', error)
       props.onLogin(false)
     }
   }
