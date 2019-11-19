@@ -16,7 +16,7 @@ router.post('/credential', async (req, res) => {
   const { accountId, password } = req.body
   let responseBody
 
-  if (accountId === 'ChamberMusic' && password === 'Trio123!') {
+  if (accountId === 'ClassicalMusic' && password === 'Trio123!') {
     const session = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     generatedTokens[session] = new Date()
     console.log(`session generated: ${session} at ${generatedTokens[session]}`)
