@@ -150,7 +150,8 @@ class Menu extends React.Component {
                     className={classes.buttonImage}
                     focusVisibleClassName={classes.focusVisible}
                     style={{
-                      width: image.width
+                      width: image.width,
+                      minHeight: '200px'
                     }}
                     // target='_blank'
                   >
