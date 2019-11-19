@@ -22,7 +22,9 @@ function LoginForm (props) {
   const history = useHistory()
   const [accountId, setAccountId] = useState('')
   const [password, setPassword] = useState('')
-  const login = async () => {
+  const login = async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
     const user = {
       accountId: accountId,
       password: password
@@ -48,7 +50,7 @@ function LoginForm (props) {
     }
   }
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={login}>
       <Fade in timeout={1000}>
         <TextField
           variant='outlined'
@@ -85,7 +87,7 @@ function LoginForm (props) {
           variant='contained'
           color='primary'
           className={classes.submit}
-          onClick={login}
+          type='submit'
         >
                 Login
         </Button>
