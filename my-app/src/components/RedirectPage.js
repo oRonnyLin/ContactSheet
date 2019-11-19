@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 // style={{ textAlign: 'center', width: '100%', padding: '70px 0' }}
-function UnauthPage () {
+function RedirectPage (props) {
   const history = useHistory()
   const classes = useStyles()
   //   console.log(`Unauth page called ${count}times`)
@@ -33,7 +33,8 @@ function UnauthPage () {
       <div className={classes.paper}>
 
         <Typography component='h1' variant='h4' gutterBottom>
-        Oops, you need to login first.
+          {props.Message}
+          {/* Oops, you need to login first. */}
         </Typography>
         <Button
           fullWidth
@@ -53,4 +54,4 @@ function UnauthPage () {
   )
 }
 
-export default UnauthPage
+export default RedirectPage

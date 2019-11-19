@@ -13,7 +13,7 @@ import LeftGrid from './components/LeftGrid.js'
 import LoginForm from './components/Login.js'
 import Menu from './components/Menu.js'
 import RightGrid from './components/RightGrid.js'
-import UnauthPage from './components/UnauthPage.js'
+import RedirectPage from './components/RedirectPage.js'
 import paulButton from './static/images/button/Paulbutton.jpg'
 import vivianButton from './static/images/button/Vivianbutton.jpg'
 import sarahButton from './static/images/button/Sarahbutton.jpg'
@@ -50,7 +50,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-        )}
+      )}
     />
   )
 }
@@ -144,10 +144,10 @@ class App extends React.Component {
                 <Menu setLoadMenuPage={(status) => { this.setLoadMenuPage(status) }} />
               </ProtectedRoute>
               <Route path='/unauthorized'>
-                <UnauthPage />
+                <RedirectPage Message='Oops, you need to login first.' />
               </Route>
-              <Route path='/test'>
-                <p>testing</p>
+              <Route>
+                <RedirectPage Message='Oops, We can not find that page. Please login.' />
               </Route>
             </Switch>
           </Router>
