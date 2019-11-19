@@ -30,9 +30,9 @@ const buttonImages = [
   },
   {
     url: sarahButton,
-    title: 'Violin',
+    title: 'Viola',
     width: '100%',
-    path: '/violin'
+    path: '/viola'
   }
 ]
 
@@ -127,7 +127,7 @@ class Menu extends React.Component {
       Group: false,
       Harp: false,
       Flute: false,
-      Violin: false
+      Viola: false
     }
     this.token = sessionStorage.getItem('token')
     this.props.setLoadMenuPage(true)

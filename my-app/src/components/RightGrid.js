@@ -62,7 +62,7 @@ class RightGrid extends React.Component {
                 <Button
                   fullWidth
                   onClick={() => {
-                    fetch('http://54.241.230.117:4000/logout', {
+                    fetch('https://rlin.altumview.com/api/logout', {
                       mode: 'cors',
                       method: 'DELETE',
                       headers: { 'Content-Type': 'application/json' },
@@ -75,10 +75,10 @@ class RightGrid extends React.Component {
                 >
                   <ArrowBackIcon />
                 </Button>
-                </Fade>
+              </Fade>
               : <Typography component='h1' variant='h5'>
                 Trio Photo
-                </Typography>}
+              </Typography>}
             {/* <Grid
               container
               direction='row'

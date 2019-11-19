@@ -50,7 +50,7 @@ function ProtectedRoute (props) {
               state: { from: location }
             }}
           />
-      )}
+        )}
     />
   )
 }
@@ -127,7 +127,7 @@ class App extends React.Component {
               <Route path='/flute' exact>
                 <Redirect to='/unauthorized' />
               </Route>
-              <Route path='/violin' exact>
+              <Route path='/viola' exact>
                 <Redirect to='/unauthorized' />
               </Route>
               <Route path='/login'>

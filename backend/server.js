@@ -5,19 +5,8 @@ const cors = require('cors')
 const path = require('path')
 const https = require('https')
 const fs = require('fs')
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-app.use(bodyParser.json())
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  next()
-})
-
+// backend
 const router = express.Router()
 const generatedTokens = {}
 router.post('/credential', async (req, res) => {
@@ -66,17 +55,27 @@ appBackend.use(bodyParser.json())
 appBackend.use(bodyParser.urlencoded({
   extended: true
 }))
-app.use(cors())
 appBackend.use(cors())
 appBackend.use('/', router)
-// app.use('/', express.static('build', { index: 'index.html' }))
-// app.use('/login', express.static('build', { index: 'index.html' }))
-// app.use('/menu', express.static('build', { index: 'index.html' }))
-// app.use('/group', express.static('contactSheets/group', { index: 'index.htm' }))
-// app.use('/harp', express.static('contactSheets/harp', { index: 'index.htm' }))
-// app.use('/flute', express.static('contactSheets/flute', { index: 'index.htm' }))
-// app.use('/violin', express.static('contactSheets/violin', { index: 'index.htm' }))
+appBackend.listen(4000, () => {
+  console.log('4000 backend server started')
+})
 
+// frontend
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+app.use(bodyParser.json())
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next()
+})
+app.use(cors())
+app.use('/api', router)
 app.use(express.static(path.join(__dirname, 'build')))
 app.use('/*photos', express.static(path.join(__dirname, 'photos')))
 app.use('/*scripts', express.static(path.join(__dirname, 'scripts')))
@@ -120,7 +119,7 @@ app.get('/flute', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
   }
 })
-app.get('/violin', function (req, res) {
+app.get('/viola', function (req, res) {
   const token = req.query.token
   console.log('[Violin]token received: ', token)
   if (generatedTokens[token]) {
@@ -129,9 +128,16 @@ app.get('/violin', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
   }
 })
-appBackend.listen(4000, () => {
-  console.log('backend server started')
-})
+
 app.listen(3000, () => {
-  console.log('server has started')
+  console.log('3000 server has started')
 })
+
+// For Amazon EC2 instance usage
+const options = {
+  key: fs.readFileSync('ssl/private.key', 'utf8'),
+  cert: fs.readFileSync('ssl/certificate.crt', 'utf8'),
+  ca: fs.readFileSync('ssl/ca_bundle.crt', 'utf8')
+}
+
+https.createServer(options, app).listen(443, () => console.log('https server ready at 443!'))
