@@ -66,7 +66,7 @@ class RightGrid extends React.Component {
                       mode: 'cors',
                       method: 'DELETE',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ token: sessionStorage.getItem('token') })
+                      body: JSON.stringify({ session: sessionStorage.getItem('session') })
                     }).then(() => {
                       sessionStorage.clear()
                       window.location.assign('/login')
@@ -75,10 +75,10 @@ class RightGrid extends React.Component {
                 >
                   <ArrowBackIcon />
                 </Button>
-              </Fade>
+                </Fade>
               : <Typography component='h1' variant='h5'>
                 Trio Photo
-              </Typography>}
+                </Typography>}
             {/* <Grid
               container
               direction='row'
@@ -93,7 +93,7 @@ class RightGrid extends React.Component {
                         mode: 'cors',
                         method: 'DELETE',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: sessionStorage.getItem('token') })
+                        body: JSON.stringify({ session: sessionStorage.getItem('session') })
                       }).then(() => {
                         sessionStorage.clear()
                         window.location.assign('/login')

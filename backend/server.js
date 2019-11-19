@@ -17,11 +17,11 @@ router.post('/credential', async (req, res) => {
   let responseBody
 
   if (accountId === 'ChamberMusic' && password === 'Trio123!') {
-    const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-    generatedTokens[token] = new Date()
-    console.log(`token generated: ${token} at ${generatedTokens[token]}`)
+    const session = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    generatedTokens[session] = new Date()
+    console.log(`session generated: ${session} at ${generatedTokens[session]}`)
     responseBody = {
-      token: token,
+      session: session,
       code: 0
     }
   } else {
@@ -34,12 +34,12 @@ router.post('/credential', async (req, res) => {
 )
 router.delete('/logout', async (req, res) => {
   console.log('request body: ', req.body)
-  const { token } = req.body
+  const { session } = req.body
   let responseBody
   try {
-    if (generatedTokens[token]) {
-      delete generatedTokens.token
-      console.log(`token deleted: ${token}`)
+    if (generatedTokens[session]) {
+      delete generatedTokens.session
+      console.log(`session deleted: ${session}`)
       responseBody = {
         code: 0
       }
@@ -97,36 +97,36 @@ app.get('/unauthorized', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 app.get('/group', async function (req, res) {
-  const token = req.query.token
-  console.log('[Group]token received: ', token)
-  if (generatedTokens[token]) {
+  const session = req.query.session
+  console.log('[Group]session received: ', session)
+  if (generatedTokens[session]) {
     res.sendFile(path.join(__dirname, 'contactSheets/group', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
   }
 })
 app.get('/harp', function (req, res) {
-  const token = req.query.token
-  console.log('[Harp]token received: ', token)
-  if (generatedTokens[token]) {
+  const session = req.query.session
+  console.log('[Harp]session received: ', session)
+  if (generatedTokens[session]) {
     res.sendFile(path.join(__dirname, 'contactSheets/harp', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
   }
 })
 app.get('/flute', function (req, res) {
-  const token = req.query.token
-  console.log('[Flute]token received: ', token)
-  if (generatedTokens[token]) {
+  const session = req.query.session
+  console.log('[Flute]session received: ', session)
+  if (generatedTokens[session]) {
     res.sendFile(path.join(__dirname, 'contactSheets/flute', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
   }
 })
 app.get('/viola', function (req, res) {
-  const token = req.query.token
-  console.log('[Violin]token received: ', token)
-  if (generatedTokens[token]) {
+  const session = req.query.session
+  console.log('[Violin]session received: ', session)
+  if (generatedTokens[session]) {
     res.sendFile(path.join(__dirname, 'contactSheets/violin', 'index.htm'))
   } else {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))

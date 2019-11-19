@@ -129,7 +129,7 @@ class Menu extends React.Component {
       Flute: false,
       Viola: false
     }
-    this.token = sessionStorage.getItem('token')
+    this.session = sessionStorage.getItem('session')
     this.props.setLoadMenuPage(true)
   }
 
@@ -144,7 +144,7 @@ class Menu extends React.Component {
                 : <div className={classes.buttonImageRoot}>
 
                   <ButtonBase
-                    href={`${image.path}?token=${this.token}`}
+                    href={`${image.path}?session=${this.session}`}
                     focusRipple
                     key={image.title}
                     className={classes.buttonImage}
@@ -175,7 +175,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                  </div>
+                </div>
             }
           </Fade>))}
       </div>

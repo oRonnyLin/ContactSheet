@@ -39,7 +39,7 @@ function LoginForm (props) {
       const jsonResponse = await loginResponse.json()
       if (jsonResponse.code === 0) {
         props.onLogin(true)
-        sessionStorage.setItem('token', jsonResponse.token)
+        sessionStorage.setItem('session', jsonResponse.session)
         sessionStorage.setItem('isLoggedin', 'true')
         history.push('/menu')
       } else {
