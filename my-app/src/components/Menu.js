@@ -136,6 +136,7 @@ class Menu extends React.Component {
 
   async componentWillUnmount () {
     this.props.setLoadMenuPage(false)
+    console.log('this called')
     if (this.token) {
       try {
         const clearTokenRequest = await fetch('http://54.241.230.117:4000/logout', {
@@ -197,7 +198,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                  </div>
+                </div>
             }
           </Fade>))}
       </div>

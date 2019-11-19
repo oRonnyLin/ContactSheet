@@ -1,3 +1,4 @@
+/* global fetch */
 import React from 'react'
 import Link from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper'
@@ -52,6 +53,7 @@ function Copyright () {
 class RightGrid extends React.Component {
   render () {
     const { classes } = this.props
+    console.log('isMenuPageLoaded ', this.props.isMenuPageLoaded)
     return (
       <Fade in timeout={1000}>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.flexColScroll}>
@@ -65,7 +67,19 @@ class RightGrid extends React.Component {
             >
               <Grid>
                 <Fade in={this.props.isMenuPageLoaded}>
-                  <Button className={classes.backButton} aria-label='delete'>
+                  <Button
+                    onClick={() => {
+                      fetch('http://54.241.230.117:4000/logout', {
+                        mode: 'cors',
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: sessionStorage.getItem('token') })
+                      }).then(() => {
+                        sessionStorage.clear()
+                        window.location.assign('/login')
+                      })
+                    }} style={{ padding: '3px' }} aria-label='delete'
+                  >
                     <ArrowBackIcon />
                   </Button>
                 </Fade>

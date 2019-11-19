@@ -1,3 +1,4 @@
+/* global fetch */
 import React from 'react'
 import {
   BrowserRouter as Router,
@@ -92,6 +93,28 @@ class App extends React.Component {
         logginError: true,
         isLoggedin: status
       })
+    }
+  }
+
+  async componentWillUnmount () {
+    this.props.setLoadMenuPage(false)
+    console.log('this called')
+    if (this.token) {
+      try {
+        const clearTokenRequest = await fetch('http://54.241.230.117:4000/logout', {
+          mode: 'cors',
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: this.token })
+        })
+        const jsonResponse = await clearTokenRequest.json()
+        if (jsonResponse.code === '0') {
+          sessionStorage.removeItem('isLoggedin')
+          sessionStorage.removeItem('token')
+        }
+      } catch (error) {
+        console.log('Error at clearTokenRequest: ', error)
+      }
     }
   }
 
