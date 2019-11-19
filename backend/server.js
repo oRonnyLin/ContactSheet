@@ -11,6 +11,7 @@ const router = express.Router()
 const generatedTokens = {}
 router.post('/credential', async (req, res) => {
   console.log('request body: ', req.body)
+  console.log('req: ', req)
   const { accountId, password } = req.body
   let responseBody
 
