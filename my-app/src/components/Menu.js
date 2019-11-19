@@ -53,7 +53,7 @@ const useStyles = theme => ({
   },
   buttonImage: {
     position: 'relative',
-    minHeight: '20vh',
+    minHeight: '200',
     [theme.breakpoints.down('xs')]: {
       width: '100% !important', // Overrides inline-style
       height: 100
@@ -175,7 +175,7 @@ class Menu extends React.Component {
                       </Typography>
                     </span>
                   </ButtonBase>
-                </div>
+                  </div>
             }
           </Fade>))}
       </div>
