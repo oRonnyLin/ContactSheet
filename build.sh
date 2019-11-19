@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git pull
 cd my-app
 npm run build
 rm -rf ../backend/build
